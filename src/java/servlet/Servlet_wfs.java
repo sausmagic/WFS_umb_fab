@@ -73,10 +73,6 @@ public class Servlet_wfs extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet Servlet_wfs at " + request.getContextPath() + "</h1>");
             out.println("<h2>" + risposta + "</h2>");
-            // out.println("<h2>" + URI + "</h2>");
-            //  out.println("<h2>" + uri2 + "</h2>");
-            //out.println("<h2>" + uri3 + "</h2>");
-            //out.println("<h2>" + URL.toString() + "</h2>");
             out.println("</body>");
             out.println("</html>");
         } finally {            
