@@ -8,7 +8,6 @@
     <system systemId="http://schemas.opengeospatial.net/ows/1.1.0/ows19115subset.xsd" uri="src/conf/xml-resources/jaxb/1/schemas.opengeospatial.net/ows/1.1.0/ows19115subset.xsd"/>
     <system systemId="http://schemas.opengeospatial.net/ows/1.1.0/owsCommon.xsd" uri="src/conf/xml-resources/jaxb/1/schemas.opengeospatial.net/ows/1.1.0/owsCommon.xsd"/>
     <system systemId="http://schemas.opengeospatial.net/ows/1.1.0/owsDomainType.xsd" uri="src/conf/xml-resources/jaxb/1/schemas.opengeospatial.net/ows/1.1.0/owsDomainType.xsd"/>
-    <system systemId="http://www.w3.org/2001/xml.xsd" uri="src/conf/xml-resources/jaxb/1/www.w3.org/2001/xml.xsd"/>
     <system systemId="http://schemas.opengeospatial.net/wfs/1.1.0/wfs.xsd" uri="src/conf/xml-resources/jaxb/2/schemas.opengeospatial.net/wfs/1.1.0/wfs.xsd"/>
     <system systemId="http://schemas.opengeospatial.net/gml/3.1.1/base/gml.xsd" uri="src/conf/xml-resources/jaxb/2/schemas.opengeospatial.net/gml/3.1.1/base/gml.xsd"/>
     <system systemId="http://schemas.opengeospatial.net/filter/1.1.0/filter.xsd" uri="src/conf/xml-resources/jaxb/2/schemas.opengeospatial.net/filter/1.1.0/filter.xsd"/>
@@ -56,4 +55,52 @@
     <system systemId="http://schemas.opengeospatial.net/ows/1.0.0/owsCommon.xsd" uri="src/conf/xml-resources/jaxb/2/schemas.opengeospatial.net/ows/1.0.0/owsCommon.xsd"/>
     <system systemId="http://schemas.opengeospatial.net/xlink/1.0.0/xlinks.xsd" uri="src/conf/xml-resources/jaxb/2/schemas.opengeospatial.net/xlink/1.0.0/xlinks.xsd"/>
     <system systemId="http://schemas.opengeospatial.net/gml/3.1.1/base/basicTypes.xsd" uri="src/conf/xml-resources/jaxb/2/schemas.opengeospatial.net/gml/3.1.1/base/basicTypes.xsd"/>
+    <system systemId="http://schemas.opengis.net/wfs/1.1.0/wfs.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/wfs/1.1.0/wfs.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
+    <system systemId="http://schemas.opengis.net/filter/1.1.0/filter.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/filter/1.1.0/filter.xsd"/>
+    <system systemId="http://schemas.opengis.net/ows/1.0.0/owsAll.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/ows/1.0.0/owsAll.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/dynamicFeature.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/dynamicFeature.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/topology.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/topology.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/coverage.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/coverage.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/coordinateReferenceSystems.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/coordinateReferenceSystems.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/observation.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/observation.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/defaultStyle.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/temporalReferenceSystems.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/temporalReferenceSystems.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/geometryAggregates.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/geometryAggregates.xsd"/>
+    <system systemId="http://schemas.opengis.net/filter/1.1.0/filterAll.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/filter/1.1.0/filterAll.xsd"/>
+    <system systemId="http://schemas.opengis.net/filter/1.1.0/expr.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/filter/1.1.0/expr.xsd"/>
+    <system systemId="http://schemas.opengis.net/filter/1.1.0/sort.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/filter/1.1.0/sort.xsd"/>
+    <system systemId="http://schemas.opengis.net/filter/1.1.0/filterCapabilities.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/filter/1.1.0/filterCapabilities.xsd"/>
+    <system systemId="http://schemas.opengis.net/ows/1.0.0/owsGetCapabilities.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/ows/1.0.0/owsGetCapabilities.xsd"/>
+    <system systemId="http://schemas.opengis.net/ows/1.0.0/owsExceptionReport.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/ows/1.0.0/owsExceptionReport.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/feature.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/feature.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/direction.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/direction.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/geometryComplexes.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/geometryComplexes.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/valueObjects.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/valueObjects.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/grids.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/grids.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/coordinateSystems.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/coordinateSystems.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/datums.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/datums.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/coordinateOperations.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/coordinateOperations.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/smil/smil20.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/smil/smil20.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/measures.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/measures.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/temporalTopology.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/temporalTopology.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/dictionary.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/dictionary.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/geometryPrimitives.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/geometryPrimitives.xsd"/>
+    <system systemId="http://schemas.opengis.net/ows/1.0.0/owsServiceIdentification.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/ows/1.0.0/owsServiceIdentification.xsd"/>
+    <system systemId="http://schemas.opengis.net/ows/1.0.0/owsServiceProvider.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/ows/1.0.0/owsServiceProvider.xsd"/>
+    <system systemId="http://schemas.opengis.net/ows/1.0.0/owsOperationsMetadata.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/ows/1.0.0/owsOperationsMetadata.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/geometryBasic2d.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/geometryBasic2d.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/temporal.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/temporal.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/geometryBasic0d1d.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/geometryBasic0d1d.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/referenceSystems.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/referenceSystems.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/dataQuality.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/dataQuality.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/smil/smil20-language.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/smil/smil20-language.xsd"/>
+    <system systemId="http://www.w3.org/2001/xml.xsd" uri="src/conf/xml-resources/jaxb/wfs/www.w3.org/2001/xml.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/units.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/units.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/gmlBase.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/gmlBase.xsd"/>
+    <system systemId="http://schemas.opengis.net/ows/1.0.0/owsDataIdentification.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/ows/1.0.0/owsDataIdentification.xsd"/>
+    <system systemId="http://schemas.opengis.net/ows/1.0.0/ows19115subset.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/ows/1.0.0/ows19115subset.xsd"/>
+    <system systemId="http://schemas.opengis.net/ows/1.0.0/owsCommon.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/ows/1.0.0/owsCommon.xsd"/>
+    <system systemId="http://www.w3.org/1999/xlink.xsd" uri="src/conf/xml-resources/jaxb/wfs/www.w3.org/1999/xlink.xsd"/>
+    <system systemId="http://schemas.opengis.net/gml/3.1.1/base/basicTypes.xsd" uri="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/gml/3.1.1/base/basicTypes.xsd"/>
 </catalog>

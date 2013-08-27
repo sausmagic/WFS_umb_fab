@@ -1,3 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <schemas xmlns='http://xml.netbeans.org/schema/JAXBWizConfig' destdir='build/generated-sources/jaxb' projectName='WFS_umb_fab' version='1.0'>
+	<schema type='-xmlschema' package='jaxb' name='wfs'>
+		<xjc-options>
+		</xjc-options>
+		<schema-sources>
+			<schema-source location='src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/wfs/1.1.0/wfs.xsd' origLocation='http://schemas.opengis.net/wfs/1.1.0/wfs.xsd' origLocationType='url'/>
+		</schema-sources>
+		<bindings>
+		</bindings>
+		<catalog/>
+	</schema>
 </schemas>
