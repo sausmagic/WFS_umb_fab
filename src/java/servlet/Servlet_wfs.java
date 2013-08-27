@@ -36,8 +36,11 @@ public class Servlet_wfs extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String requestString = request.getParameter("body");
+        String urlString = request.getParameter("url");
+        boolean doGet = (requestString == null) || requestString.trim().equals("");
         utility = new Utility();
-        parametri = utility.parsingGetParam(request, response);     
+        utility.parsingGetParam(request, response);     
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -54,6 +57,7 @@ public class Servlet_wfs extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+                
     }
 
     /**

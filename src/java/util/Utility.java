@@ -10,7 +10,7 @@ package util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Utility {
     
+    
     /**
      * Metodo che prende in input i parametri di una servlet 
      * Analizza la richiesta ti tipo GET ricevuta nell URL ed effettua un controllo sul nome dei paramtri 
@@ -34,11 +35,11 @@ public class Utility {
      * @return
      * @throws IOException 
      */
-    public List<String> parsingGetParam(HttpServletRequest request, HttpServletResponse response) throws IOException{
-       List<String> returnParametri = new ArrayList<String>();
-       
+    public void parsingGetParam(HttpServletRequest request, HttpServletResponse response) throws IOException{
+      
         String richiesta = new String(); //= request.getParameter("request");
-        String service = new String();; // = request.getParameter("service");
+        String service = new String(); // = request.getParameter("service");
+        String version = new String();
         
         Map params = request.getParameterMap();
         
@@ -50,17 +51,14 @@ public class Utility {
                 richiesta = value;
             if (key.equalsIgnoreCase("service"))
                 service = value;
+            if(key.equalsIgnoreCase("version"))
+                version = value;      
         }
                
-        String URI = request.getPathInfo();
-        String uri2 = request.getRequestURI();
-        String uri3= new String();
-        StringBuffer URL = request.getRequestURL();
-         Enumeration<String> parametri = request.getParameterNames();
-         while (parametri.hasMoreElements()) {
-          uri3 = uri3 + parametri.nextElement();
-        }
-        String risposta = cosavuole(richiesta);
+         
+        //sostituire il tutto com MAP<K,V> 
+        String risposta = cosavuole(richiesta+service+version);
+        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -77,18 +75,32 @@ public class Utility {
         } finally {            
             out.close();
         }
-        returnParametri.add(richiesta);
-        returnParametri.add(risposta);
-        return returnParametri;
+       
         
         
     }
     
     private String cosavuole(String richiesta) {
-        String risposta;
+       String risposta;
+       String[] valoriParametri = richiesta.split("\"");
+        for (String string : valoriParametri) {
+            System.out.println("#################### "+ string);
+        }
+        List<String> appoggio = new ArrayList<String>();
+        for (int i = 0; i < valoriParametri.length; i++) {
+            if(i%2 != 0)
+                appoggio.add(valoriParametri[i]);         
+        }
+        Iterator<String> it = appoggio.iterator();
+        while (it.hasNext()) {
+            String object = it.next();
+            System.out.println("dsbsdfhehehsdfhf "+ object);
+        }
+                
         boolean v;
         System.out.println("------------------------ "+ richiesta);
-        richiesta = richiesta.substring(1, richiesta.length()-1);
+        richiesta = appoggio.get(0);
+        //richiesta = richiesta.substring(1, richiesta.length()-1);
         System.out.println("------------------------ "+ richiesta);
 
         v = richiesta.trim().equalsIgnoreCase("GetCapabilities");
@@ -104,4 +116,7 @@ public class Utility {
         }
         return risposta;
     }
+    
+    
+    
 }
