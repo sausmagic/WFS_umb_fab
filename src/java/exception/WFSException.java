@@ -63,6 +63,11 @@ public class WFSException extends ExceptionClass{
         }
         if(request instanceof HttpServletRequest)
             locator = ((HttpServletRequest)request).getClass().getName();
+        if(request instanceof String){
+            System.out.println("il parametro request è: "+ (String)request);
+            code = (String)request;
+            return this;
+        }
         return this;
     }
     

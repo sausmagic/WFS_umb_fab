@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import wfs.GetCapabilities;
+import wfs.NegotiateVersion;
 
 /**
  *La classe crea una GetCabilitiesRequest
@@ -27,6 +28,10 @@ public class GetCapabilitiesRequest {
         this.setRequest(parametriRichiesta.get("request")[0]);
         this.setService(parametriRichiesta.get("service")[0]);
         this.setVersion(parametriRichiesta.get("version")[0]);
+        boolean acceptedVer = NegotiateVersion.acceptedVersion(this.getVersion());
+        System.out.println("La versione+ "+this.getVersion()+" è accettata dal server?: "+acceptedVer);
+        if(!acceptedVer)
+            throw new WFSException(request,"Errore versione non supportata dal server", null, "UnsupportedVersionFromServer");
         GetCapabilities getCapabilities = new GetCapabilities(this);
         
     }

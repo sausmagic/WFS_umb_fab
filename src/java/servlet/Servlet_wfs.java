@@ -39,8 +39,12 @@ public class Servlet_wfs extends HttpServlet {
         String requestString = request.getParameter("body");
         String urlString = request.getParameter("url");
         
+        /**
+         * nell'eventualità volessimo controllare che siamo nel metodo GET o POST
+         */
         boolean doGet = (requestString == null) || requestString.trim().equals("");
         System.out.println("DOGET: "+doGet);
+        
         utility = new Utility();
         utility.parsingGetParam(request, response);     
     }
