@@ -38,7 +38,9 @@ public class Servlet_wfs extends HttpServlet {
             throws ServletException, IOException {
         String requestString = request.getParameter("body");
         String urlString = request.getParameter("url");
+        
         boolean doGet = (requestString == null) || requestString.trim().equals("");
+        System.out.println("DOGET: "+doGet);
         utility = new Utility();
         utility.parsingGetParam(request, response);     
     }

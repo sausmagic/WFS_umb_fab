@@ -11,20 +11,6 @@
     <target name="jaxb-code-generation" depends="xjc-typedef-target,-do-init,-init-macrodef-javac">
         <mkdir dir="${build.generated.sources.dir}/jaxb" xmlns:s="http://xml.netbeans.org/schema/JAXBWizConfig"/>
         <mkdir dir="build/generated/jaxbCache" xmlns:s="http://xml.netbeans.org/schema/JAXBWizConfig"/>
-        <mkdir dir="build/generated/jaxbCache/wfs"/>
-        <xjc package="jaxb" destdir="build/generated/jaxbCache/wfs" catalog="catalog.xml">
-            <classpath>
-                <pathelement location="${src.dir}"/>
-                <pathelement path="${jaxbwiz.xjcrun.classpath}"/>
-            </classpath>
-            <arg value="-xmlschema"/>
-            <schema file="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/wfs/1.1.0/wfs.xsd"/>
-            <depends file="src/conf/xml-resources/jaxb/wfs/schemas.opengis.net/wfs/1.1.0/wfs.xsd"/>
-            <produces dir="build/generated/jaxbCache/wfs"/>
-        </xjc>
-        <copy todir="${build.generated.sources.dir}/jaxb">
-            <fileset dir="build/generated/jaxbCache/wfs"/>
-        </copy>
         <!--*** Web project javac macro does not support sourcepath attribute, so do not pass "sourcepath=${src.dir}"-->
     </target>
 </project>

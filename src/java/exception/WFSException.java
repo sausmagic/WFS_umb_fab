@@ -4,6 +4,7 @@
  */
 package exception;
 
+import javax.servlet.http.HttpServletRequest;
 import request.GetCapabilitiesRequest;
 
 /**
@@ -54,10 +55,15 @@ public class WFSException extends ExceptionClass{
      * 
      * @param request 
      */
-    private void init(Object request) {
-        if(request instanceof GetCapabilitiesRequest)
-            locator = ((GetCapabilitiesRequest)request).getClass().getName();
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private WFSException init(Object request) {
+        System.out.println("Mi trovo nella classe delle eccezzioni l'oggetto in input a questo metodo INIT");
+        if(request != null){
+            System.out.println("Il parametro request non è null");
+            
+        }
+        if(request instanceof HttpServletRequest)
+            locator = ((HttpServletRequest)request).getClass().getName();
+        return this;
     }
     
 }

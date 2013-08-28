@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import request.GetCapabilitiesRequest;
 
 /**
  *In questa classe sono presenti tutti i metodi di supporto ed utilità
@@ -54,9 +55,12 @@ public class Utility {
             if(key.equalsIgnoreCase("version"))
                 version = value;      
         }
-               
-         
-        //sostituire il tutto com MAP<K,V> 
+        
+        /**
+         * identifico la richiesta del client specificato nel parametro "request"
+         */
+        requestOperation(richiesta, request);
+        
         String risposta = cosavuole(richiesta+service+version);
         
         response.setContentType("text/html;charset=UTF-8");
@@ -117,6 +121,82 @@ public class Utility {
         return risposta;
     }
     
+    /**
+     * Questo metodo identifica il tipo di richiesta effettuata dal client 
+     * in base alla richiesta ricevuta in input il server provvederà a richiamare
+     * la classe che soddisfi tale richiesta
+     * @param richiesta
+     * @return 
+     */
+    public void requestOperation (String richiesta, HttpServletRequest request){
+        
+        String richiest = richiesta.substring(1, richiesta.length()-1);
+        System.out.println("mi trovo nel metodoche richiama la classe GetCapabilitiesRequest il parametro richiesta è: "+richiest);
+        if(richiest.equalsIgnoreCase("GetCapabilities"))
+            new GetCapabilitiesRequest(request);
+        
+    }
     
+    /**
+     * Metodo che prende in input i parametri di una servlet 
+     * Analizza la richiesta ti tipo GET ricevuta nell URL ed effettua un controllo sul nome dei paramtri 
+     * di input in modo che siano case insensitive
+     * 
+     * ES. il parametro "request" può essere scritto Request/ReQuEsT/ ecc....
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException 
+     
+    public Map<String, String[]> parsingGetParam(HttpServletRequest request, HttpServletResponse response) throws IOException{
+      
+        Map<String, String[]> parametriRichiesta = new HashMap<String, String[]>();
+        String richiesta = new String(); //= request.getParameter("request");
+        String service = new String(); // = request.getParameter("service");
+        String version = new String();
+        
+        Map params = request.getParameterMap();
+        
+        Iterator i = params.keySet().iterator();
+        while (i.hasNext()) {
+            String key = (String)i.next();
+            String value = ((String[])params.get(key))[0];
+            if(key.equalsIgnoreCase("request"))
+                richiesta = value;
+            if (key.equalsIgnoreCase("service"))
+                service = value;
+            if(key.equalsIgnoreCase("version"))
+                version = value;      
+        }
+        
+        /**
+         * identifico la richiesta del client specificato nel parametro "request"
+         
+        requestOperation(richiesta, request);
+        
+        String risposta = cosavuole(richiesta+service+version);
+        
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Servlet_wfs</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Servlet_wfs at " + request.getContextPath() + "</h1>");
+            out.println("<h2>" + risposta + "</h2>");
+            out.println("</body>");
+            out.println("</html>");
+        } finally {            
+            out.close();
+        }
+       
+        
+        return parametriRichiesta;
+    }
+    
+    **/
     
 }

@@ -4,6 +4,12 @@
  */
 package request;
 
+import exception.WFSException;
+import java.util.HashMap;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import wfs.GetCapabilities;
+
 /**
  *La classe crea una GetCabilitiesRequest
  * @author Umberto
@@ -12,6 +18,18 @@ public class GetCapabilitiesRequest {
     
     private String request,service,version;
 
+    
+    public GetCapabilitiesRequest(HttpServletRequest request) throws WFSException{
+        Map<String,String[]> parametriRichiesta = new HashMap<String, String[]>();
+        parametriRichiesta = request.getParameterMap();
+         if (parametriRichiesta.get("request")==null || parametriRichiesta.get("service")==null || parametriRichiesta.get("version")==null)
+            throw new WFSException(request,"Errore non sono stati definiti uno o più dei parametri mandatory", null, "MissingParameterValue");
+        this.setRequest(parametriRichiesta.get("request")[0]);
+        this.setService(parametriRichiesta.get("service")[0]);
+        this.setVersion(parametriRichiesta.get("version")[0]);
+        GetCapabilities getCapabilities = new GetCapabilities(this);
+        
+    }
     /**
      * Creiamo un bean della richiesta che riceviamo 
      * Nel costruttore abbiamo solo i parametri identificati dalla specifica OGC come "mandatory"
@@ -27,6 +45,8 @@ public class GetCapabilitiesRequest {
         this.service = service;
         this.version = version;
     }
+    
+    
 
     public void setRequest(String request) {
         this.request = request;
@@ -50,8 +70,5 @@ public class GetCapabilitiesRequest {
 
     public String getVersion() {
         return version;
-    }
-    
-    public void GetCapabilitiesRequest(){
     }
 }
