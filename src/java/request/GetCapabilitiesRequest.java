@@ -30,6 +30,9 @@ public class GetCapabilitiesRequest {
         this.setVersion(parametriRichiesta.get("version")[0]);
         boolean acceptedVer = NegotiateVersion.acceptedVersion(this.getVersion());
         System.out.println("La versione+ "+this.getVersion()+" è accettata dal server?: "+acceptedVer);
+        
+        //ora viene lanciata un eccezione si deve implementare la vera e
+        // propria negoziazione tra server e client 
         if(!acceptedVer)
             throw new WFSException(request,"Errore versione non supportata dal server", null, "UnsupportedVersionFromServer");
         GetCapabilities getCapabilities = new GetCapabilities(this);
