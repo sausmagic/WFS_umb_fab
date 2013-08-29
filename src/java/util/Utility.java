@@ -57,7 +57,15 @@ public class Utility {
             if (key.equalsIgnoreCase("service"))
                 service = value;
             if(key.equalsIgnoreCase("version"))
-                version = value;      
+                version = value;
+            if(key.equalsIgnoreCase("section"))
+                continue;
+            if(key.equalsIgnoreCase("updatesequence"))
+                continue;
+            if(key.equalsIgnoreCase("acceptfotmats"))
+                continue;
+            if(key.equalsIgnoreCase("acceptlanguages"))
+                continue;
         }
         
         /**

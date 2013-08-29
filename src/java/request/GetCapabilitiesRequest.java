@@ -7,10 +7,8 @@ package request;
 import exception.WFSException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import servlet.RequestResponse;
 import wfs.GetCapabilities;
 import wfs.NegotiateVersion;
@@ -26,17 +24,18 @@ public class GetCapabilitiesRequest {
     private List<String> sections, acceptFormat,acceptLenguage;
     
     
+    
     public GetCapabilitiesRequest(RequestResponse request) throws WFSException{
+        this.init();
         Map<String,String[]> parametriRichiesta = new HashMap<String, String[]>();
         parametriRichiesta = request.getRequest().getParameterMap();
-         //if (parametriRichiesta.get("request")==null || parametriRichiesta.get("service")==null || parametriRichiesta.get("version")==null)
-         if (parametriRichiesta.get("request")==null || parametriRichiesta.get("service")==null)
+        
+        if (parametriRichiesta.get("request")==null || parametriRichiesta.get("service")==null)
              throw new WFSException(request,"Errore non sono stati definiti uno o più dei parametri mandatory", null, "MissingParameterValue");
+        
         this.setRequest(parametriRichiesta.get("request")[0]);
         this.setService(parametriRichiesta.get("service")[0]);
         
-        //this.setUpdateSequence(parametriRichiesta.get("updateSequence")[0]);
-        //sections = new ArrayList<String>();
         if(parametriRichiesta.containsKey("version")){
             this.setVersion(parametriRichiesta.get("version")[0]);
             boolean acceptedVer = NegotiateVersion.acceptedVersion(this.getVersion());
@@ -48,17 +47,47 @@ public class GetCapabilitiesRequest {
             System.out.println("Ho settato la versione supportata dal server in quanto non specificata dal client. Versione supportata " + NegotiateVersion.getSupportedVersion());
         }
         
+        /**
+         * Controlliamo se è stato specificato il parametro Section e quali sezioni il client ha richiesto
+         */
         if(parametriRichiesta.containsKey("section")){
             String[] sectionValue = parametriRichiesta.get("section");
             for (int i = 0; i < sectionValue.length; i++) {
                 sections.add(sectionValue[i]);
-      
             }      
         }else{
             this.setSections(new ArrayList<String>());
         }
-       
         
+        if(parametriRichiesta.containsKey("updateSequence")){
+            this.setUpdateSequence(parametriRichiesta.get("updateSequence")[0]);
+        }else{
+            this.setUpdateSequence(new String());
+        }
+        
+        if(parametriRichiesta.containsKey("acceptFormats")){
+            String[] acceptformat = parametriRichiesta.get("acceptFormats");
+            for (int i = 0; i < acceptformat.length; i++) {
+                acceptFormat.add(acceptformat[i]);          
+            }
+        }else{
+            this.setAcceptFormat(new ArrayList<String>());
+        }
+        
+        if(parametriRichiesta.containsKey("acceptLanguages")){
+            String[] acceptleng = parametriRichiesta.get("acceptLanguages");
+            for (int i = 0; i < acceptleng.length; i++) {
+                acceptLenguage.add(acceptleng[i]);          
+            }
+        }else{
+            this.setAcceptLenguage(new ArrayList<String>());
+        }
+        
+       
+        /**
+         * una volta costruita la request il server analizza i dati e procederà a eseguire la response
+         * al client
+         */
         GetCapabilities getCapabilities = new GetCapabilities(this);
         
     }
@@ -134,5 +163,16 @@ public class GetCapabilitiesRequest {
 
     public String getVersion() {
         return version;
+    }
+
+    private void init() {
+        request = new String();
+        service = new String();
+        version = new String();
+        updateSequence = new String();
+        sections = new ArrayList<String>();
+        acceptFormat = new ArrayList<String>();
+        acceptLenguage = new ArrayList<String>();
+        
     }
 }

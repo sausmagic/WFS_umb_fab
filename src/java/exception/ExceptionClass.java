@@ -18,12 +18,13 @@ public class ExceptionClass extends RuntimeException{
     
     public static final String MISSING_PARAMETER_VALUE = "MissingParameterValue";
     public static final String INVALID_PARAMETER_VALUE = "InvalidParameterValue";
+    public static final String VERSION_NEGOTIATION_FAILED = "VersionNegotiationFailed";
+    public static final String INVALID_UPDATE_SEQUENCE = "InvalidUpdateSequence";
     public static final String NO_APPLICABLE_CODE = "NoApplicableCode";
     public static final String UNSUPPORTED_COMBINATION = "UnsupportedCombination";
     public static final String NOT_ENOUGH_STORAGE = "NotEnoughStorage";
-    public static final String INVALID_UPDATE_SEQUENCE = "InvalidUpdateSequence";
     public static final String CURRENT_UPDATE_SEQUENCE = "CurrentUpdateSequence";
-    public static final String VERSION_NEGOTIATION_FAILED = "VersionNegotiationFailed";
+    
     
     protected String locator;
     protected String code;
