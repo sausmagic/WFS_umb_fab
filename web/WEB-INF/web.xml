@@ -4,18 +4,18 @@
         <servlet-name>Servlet_wfs</servlet-name>
         <servlet-class>servlet.Servlet_wfs</servlet-class>
     </servlet>
-    <servlet>
+    <!--<servlet>
         <servlet-name>GetCapabilitiesRequest</servlet-name>
         <servlet-class>request.GetCapabilitiesRequest</servlet-class>
-    </servlet>
+    </servlet> -->
     <servlet-mapping>
         <servlet-name>Servlet_wfs</servlet-name>
         <url-pattern>/Servlet_wfs</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+   <!-- <servlet-mapping>
         <servlet-name>GetCapabilitiesRequest</servlet-name>
         <url-pattern>/GetCapabilitiesRequest</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
     <session-config>
         <session-timeout>
             30
