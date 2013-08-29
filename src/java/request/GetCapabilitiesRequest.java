@@ -7,6 +7,7 @@ package request;
 import exception.WFSException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +38,6 @@ public class GetCapabilitiesRequest {
         //this.setUpdateSequence(parametriRichiesta.get("updateSequence")[0]);
         //sections = new ArrayList<String>();
         if(parametriRichiesta.containsKey("version")){
-        //if(parametriRichiesta.get("version")[0] != null){
             this.setVersion(parametriRichiesta.get("version")[0]);
             boolean acceptedVer = NegotiateVersion.acceptedVersion(this.getVersion());
             System.out.println("La versione "+this.getVersion()+" è accettata dal server?: "+acceptedVer);
@@ -46,6 +46,16 @@ public class GetCapabilitiesRequest {
         }else{
             this.setVersion(NegotiateVersion.getSupportedVersion());
             System.out.println("Ho settato la versione supportata dal server in quanto non specificata dal client. Versione supportata " + NegotiateVersion.getSupportedVersion());
+        }
+        
+        if(parametriRichiesta.containsKey("section")){
+            String[] sectionValue = parametriRichiesta.get("section");
+            for (int i = 0; i < sectionValue.length; i++) {
+                sections.add(sectionValue[i]);
+      
+            }      
+        }else{
+            this.setSections(new ArrayList<String>());
         }
        
         
