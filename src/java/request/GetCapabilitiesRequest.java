@@ -5,36 +5,50 @@
 package request;
 
 import exception.WFSException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import servlet.RequestResponse;
 import wfs.GetCapabilities;
 import wfs.NegotiateVersion;
 
 /**
  *La classe crea una GetCabilitiesRequest
+ * Memorizza e analizza i dati ricevuti come richiesta dal client
  * @author Umberto
  */
 public class GetCapabilitiesRequest {
     
-    private String request,service,version;
-
+    private String request,service,version, updateSequence;
+    private List<String> sections, acceptFormat,acceptLenguage;
     
-    public GetCapabilitiesRequest(HttpServletRequest request) throws WFSException{
+    
+    public GetCapabilitiesRequest(RequestResponse request) throws WFSException{
         Map<String,String[]> parametriRichiesta = new HashMap<String, String[]>();
-        parametriRichiesta = request.getParameterMap();
-         if (parametriRichiesta.get("request")==null || parametriRichiesta.get("service")==null || parametriRichiesta.get("version")==null)
-            throw new WFSException(request,"Errore non sono stati definiti uno o più dei parametri mandatory", null, "MissingParameterValue");
+        parametriRichiesta = request.getRequest().getParameterMap();
+         //if (parametriRichiesta.get("request")==null || parametriRichiesta.get("service")==null || parametriRichiesta.get("version")==null)
+         if (parametriRichiesta.get("request")==null || parametriRichiesta.get("service")==null)
+             throw new WFSException(request,"Errore non sono stati definiti uno o più dei parametri mandatory", null, "MissingParameterValue");
         this.setRequest(parametriRichiesta.get("request")[0]);
         this.setService(parametriRichiesta.get("service")[0]);
-        this.setVersion(parametriRichiesta.get("version")[0]);
-        boolean acceptedVer = NegotiateVersion.acceptedVersion(this.getVersion());
-        System.out.println("La versione+ "+this.getVersion()+" è accettata dal server?: "+acceptedVer);
         
-        //ora viene lanciata un eccezione si deve implementare la vera e
-        // propria negoziazione tra server e client 
-        if(!acceptedVer)
+        //this.setUpdateSequence(parametriRichiesta.get("updateSequence")[0]);
+        //sections = new ArrayList<String>();
+        if(parametriRichiesta.containsKey("version")){
+        //if(parametriRichiesta.get("version")[0] != null){
+            this.setVersion(parametriRichiesta.get("version")[0]);
+            boolean acceptedVer = NegotiateVersion.acceptedVersion(this.getVersion());
+            System.out.println("La versione "+this.getVersion()+" è accettata dal server?: "+acceptedVer);
+            if(!acceptedVer)
             throw new WFSException(request,"Errore versione non supportata dal server", null, "UnsupportedVersionFromServer");
+        }else{
+            this.setVersion(NegotiateVersion.getSupportedVersion());
+            System.out.println("Ho settato la versione supportata dal server in quanto non specificata dal client. Versione supportata " + NegotiateVersion.getSupportedVersion());
+        }
+       
+        
         GetCapabilities getCapabilities = new GetCapabilities(this);
         
     }
@@ -52,6 +66,38 @@ public class GetCapabilitiesRequest {
         this.request = request;
         this.service = service;
         this.version = version;
+    }
+
+    public String getUpdateSequence() {
+        return updateSequence;
+    }
+
+    public void setUpdateSequence(String updateSequence) {
+        this.updateSequence = updateSequence;
+    }
+
+    public List<String> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<String> sections) {
+        this.sections = sections;
+    }
+
+    public List<String> getAcceptFormat() {
+        return acceptFormat;
+    }
+
+    public void setAcceptFormat(List<String> acceptFormat) {
+        this.acceptFormat = acceptFormat;
+    }
+
+    public List<String> getAcceptLenguage() {
+        return acceptLenguage;
+    }
+
+    public void setAcceptLenguage(List<String> acceptLenguage) {
+        this.acceptLenguage = acceptLenguage;
     }
     
     

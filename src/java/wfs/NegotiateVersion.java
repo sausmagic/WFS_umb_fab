@@ -16,6 +16,8 @@ public class NegotiateVersion {
     
     public static boolean acceptedVersion(String version){
     
+       // if(version.isEmpty())
+          //  getSupportedVersion();
         System.out.println("il parametro versione è: "+version);
         System.out.println("il parametro VS_11 è: "+VS_11);
         version = version.substring(1,version.length()-1);
@@ -24,5 +26,9 @@ public class NegotiateVersion {
             return true;
         }
         return false;
+    }
+    
+    public static String getSupportedVersion(){
+        return VS_11;
     }
 }

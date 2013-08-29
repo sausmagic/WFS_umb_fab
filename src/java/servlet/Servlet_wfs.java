@@ -43,10 +43,17 @@ public class Servlet_wfs extends HttpServlet {
          * nell'eventualità volessimo controllare che siamo nel metodo GET o POST
          */
         boolean doGet = (requestString == null) || requestString.trim().equals("");
+        
         System.out.println("DOGET: "+doGet);
         
         utility = new Utility();
+        
+        if(doGet){
         utility.parsingGetParam(request, response);     
+        }
+        else{
+            utility.parsingPostParam(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

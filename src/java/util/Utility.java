@@ -17,6 +17,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import request.GetCapabilitiesRequest;
+import servlet.RequestResponse;
 
 /**
  *In questa classe sono presenti tutti i metodi di supporto ed utilità
@@ -42,6 +43,9 @@ public class Utility {
         String service = new String(); // = request.getParameter("service");
         String version = new String();
         
+        /**
+         * Prendiamo il nome dei parametri in modo che possano essere richiamati in qualsiasi forma
+         */
         Map params = request.getParameterMap();
         
         Iterator i = params.keySet().iterator();
@@ -59,7 +63,8 @@ public class Utility {
         /**
          * identifico la richiesta del client specificato nel parametro "request"
          */
-        requestOperation(richiesta, request);
+        RequestResponse reqResp = new RequestResponse(request, response);
+        requestOperation(richiesta, reqResp);
         
         String risposta = cosavuole(richiesta+service+version);
         
@@ -128,13 +133,17 @@ public class Utility {
      * @param richiesta
      * @return 
      */
-    public void requestOperation (String richiesta, HttpServletRequest request){
+    public void requestOperation (String richiesta, RequestResponse request){
         
         String richiest = richiesta.substring(1, richiesta.length()-1);
         System.out.println("mi trovo nel metodoche richiama la classe GetCapabilitiesRequest il parametro richiesta è: "+richiest);
         if(richiest.equalsIgnoreCase("GetCapabilities"))
             new GetCapabilitiesRequest(request);
         
+    }
+
+    public void parsingPostParam(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     /**
