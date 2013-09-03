@@ -7,6 +7,7 @@
  */
 package util;
 
+import exception.WFSException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -72,6 +73,7 @@ public class Utility {
          * identifico la richiesta del client specificato nel parametro "request"
          */
         RequestResponse reqResp = new RequestResponse(request, response);
+        try{
         requestOperation(richiesta, reqResp);
         
         String risposta = cosavuole(richiesta+service+version);
@@ -91,6 +93,20 @@ public class Utility {
             out.println("</html>");
         } finally {            
             out.close();
+        }
+        }catch (WFSException e) {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter wr = response.getWriter();
+            wr.println("<!DOCTYPE html>");
+            wr.println("<html>");
+            wr.println("<head>");
+            wr.println("<title>Servlet Servlet_wfs exception</title>");            
+            wr.println("</head>");
+            wr.println("<body>");
+            wr.println("<h1>Servlet Servlet_wfs at " + request.getContextPath() + "</h1>");
+            wr.println("<h2>" + e.getMessage() + "</h2>");
+            wr.println("</body>");
+            wr.println("</html>");
         }
        
         
@@ -141,17 +157,24 @@ public class Utility {
      * @param richiesta
      * @return 
      */
-    public void requestOperation (String richiesta, RequestResponse request){
+    public void requestOperation (String richiesta, RequestResponse request) throws WFSException{
         
         String richiest = richiesta.substring(1, richiesta.length()-1);
         System.out.println("mi trovo nel metodoche richiama la classe GetCapabilitiesRequest il parametro richiesta è: "+richiest);
-        if(richiest.equalsIgnoreCase("GetCapabilities"))
+        if(richiest.equalsIgnoreCase("GetCapabilities")){
             new GetCapabilitiesRequest(request);
-        
+        }
+   
     }
 
+    /**
+     * 
+     * @param request
+     * @param response 
+     */
     public void parsingPostParam(HttpServletRequest request, HttpServletResponse response) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
     /**

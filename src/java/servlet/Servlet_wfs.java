@@ -36,20 +36,20 @@ public class Servlet_wfs extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String requestString = request.getParameter("body");
-        String urlString = request.getParameter("url");
         
         /**
          * nell'eventualità volessimo controllare che siamo nel metodo GET o POST
          */
-        boolean doGet = (requestString == null) || requestString.trim().equals("");
+        String requestMethod = request.getMethod();
+        System.out.println("METODO: "+requestMethod);
+        boolean doGet = (requestMethod.equalsIgnoreCase("post"));
         
         System.out.println("DOGET: "+doGet);
         
         utility = new Utility();
         
-        if(doGet){
-        utility.parsingGetParam(request, response);     
+        if(!doGet){
+            utility.parsingGetParam(request, response);     
         }
         else{
             utility.parsingPostParam(request, response);

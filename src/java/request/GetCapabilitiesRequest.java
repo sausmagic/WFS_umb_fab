@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import net.opengis.wfs.v_1_1_0.*;
 import servlet.RequestResponse;
 import wfs.GetCapabilities;
 import wfs.NegotiateVersion;
@@ -24,12 +25,20 @@ public class GetCapabilitiesRequest {
     private List<String> sections, acceptFormat,acceptLenguage;
     
     
-    
+    /**
+     * 
+     * @param request permette di avere accesso ai dati della servlet
+     * @throws WFSException eccezioe che viene lanciata in caso di parametri errati
+     */
     public GetCapabilitiesRequest(RequestResponse request) throws WFSException{
+        //inizializza i parametri della classe
         this.init();
+        
+        //estraggo i parametri della richiesta
         Map<String,String[]> parametriRichiesta = new HashMap<String, String[]>();
         parametriRichiesta = request.getRequest().getParameterMap();
         
+        //analizzo i parametri
         if (parametriRichiesta.get("request")==null || parametriRichiesta.get("service")==null)
              throw new WFSException(request,"Errore non sono stati definiti uno o più dei parametri mandatory", null, "MissingParameterValue");
         
@@ -56,13 +65,15 @@ public class GetCapabilitiesRequest {
                 sections.add(sectionValue[i]);
             }      
         }else{
-            this.setSections(new ArrayList<String>());
+            ArrayList<String> sec = new ArrayList<String>();
+            this.setSections(sec);
         }
         
         if(parametriRichiesta.containsKey("updateSequence")){
             this.setUpdateSequence(parametriRichiesta.get("updateSequence")[0]);
         }else{
-            this.setUpdateSequence(new String());
+            String us= new String();
+            this.setUpdateSequence(us);
         }
         
         if(parametriRichiesta.containsKey("acceptFormats")){
@@ -71,7 +82,8 @@ public class GetCapabilitiesRequest {
                 acceptFormat.add(acceptformat[i]);          
             }
         }else{
-            this.setAcceptFormat(new ArrayList<String>());
+            ArrayList<String> accFor = new ArrayList<String>();
+            this.setAcceptFormat(accFor);
         }
         
         if(parametriRichiesta.containsKey("acceptLanguages")){
@@ -80,7 +92,8 @@ public class GetCapabilitiesRequest {
                 acceptLenguage.add(acceptleng[i]);          
             }
         }else{
-            this.setAcceptLenguage(new ArrayList<String>());
+            ArrayList<String> acclang = new ArrayList<String>();
+            this.setAcceptLenguage(acclang);
         }
         
        
@@ -88,7 +101,7 @@ public class GetCapabilitiesRequest {
          * una volta costruita la request il server analizza i dati e procederà a eseguire la response
          * al client
          */
-        GetCapabilities getCapabilities = new GetCapabilities(this);
+        GetCapabilities getCapabilities = new GetCapabilities(this, request);
         
     }
     /**
@@ -173,6 +186,6 @@ public class GetCapabilitiesRequest {
         sections = new ArrayList<String>();
         acceptFormat = new ArrayList<String>();
         acceptLenguage = new ArrayList<String>();
-        
+                
     }
 }
