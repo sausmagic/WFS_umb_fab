@@ -40,8 +40,8 @@ public class Utility {
      */
     public void parsingGetParam(HttpServletRequest request, HttpServletResponse response) throws IOException{
       
-        String richiesta = new String(); //= request.getParameter("request");
-        String service = new String(); // = request.getParameter("service");
+        String richiesta = new String(); 
+        String service = new String(); 
         String version = new String();
         
         /**
@@ -173,8 +173,9 @@ public class Utility {
      * @param response 
      */
     public void parsingPostParam(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
+         String richiesta = new String(); 
+        String service = new String(); 
+        String version = new String();
     }
     
     /**

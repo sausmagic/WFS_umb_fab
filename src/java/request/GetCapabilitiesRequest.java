@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import net.opengis.wfs.v_1_1_0.*;
+
 import servlet.RequestResponse;
 import wfs.GetCapabilities;
 import wfs.NegotiateVersion;
