@@ -31,9 +31,9 @@ public class WFSException extends ExceptionClass{
         super(cause);
     }
 
-    public WFSException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+  /*  public WFSException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
-    }
+    }*/
     
      public WFSException(Object request, String message, Throwable cause, String code) {
         this(message, cause, code);

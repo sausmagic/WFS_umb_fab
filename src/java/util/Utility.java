@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import request.GetCapabilitiesRequest;
 import servlet.RequestResponse;
 
@@ -114,7 +115,7 @@ public class Utility {
         try {
             requestOperation(richiesta, reqResp);
 
-            String risposta = cosavuole(richiesta + service + version);
+            String risposta = cosavuole(richiesta +"&"+ service + "&" + version);
             //String risposta = cosavuole(params);
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -254,16 +255,17 @@ public class Utility {
      */
     private String cosavuole(String richiesta) throws IndexOutOfBoundsException {
         String risposta =null;
-        if(richiesta.startsWith("\"")){
-        String[] valoriParametri = richiesta.split("\"");
+        System.out.println("La richiesta è: "+richiesta);
+       //if(richiesta.startsWith("\"")){
+        String[] valoriParametri = richiesta.split("&");
         for (String string : valoriParametri) {
             System.out.println("#################### " + string);
         }
         List<String> appoggio = new ArrayList<String>();
         for (int i = 0; i < valoriParametri.length; i++) {
-            if (i % 2 != 0) {
+            //if (i % 2 != 0) {
                 appoggio.add(valoriParametri[i]);
-            }
+            //}
         }
         
         Iterator<String> it = appoggio.iterator();
@@ -288,7 +290,8 @@ public class Utility {
         } else {
             risposta = "non so che vuole";
             System.out.println("********************* " + richiesta);
-        }}
+        }//}
+       
         return risposta;
     }
 

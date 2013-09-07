@@ -48,9 +48,9 @@ public class ExceptionClass extends RuntimeException{
         super(cause);
     }
 
-    public ExceptionClass(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+   /* public ExceptionClass(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
-    }
+    }*/
     
     /**
      * 
