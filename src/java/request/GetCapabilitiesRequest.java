@@ -14,7 +14,7 @@ import wfs.GetCapabilities;
 import wfs.NegotiateVersion;
 
 /**
- *La classe crea una GetCabilitiesRequest
+ * La classe crea una GetCabilitiesRequest
  * Memorizza e analizza i dati ricevuti come richiesta dal client
  * @author Umberto
  */

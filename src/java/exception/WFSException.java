@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
  * @author Umberto
  */
 public class WFSException extends ExceptionClass{
+    public enum Code {
+        OperationProcessingFailed
+    };
 
     public WFSException() {
     }
@@ -31,11 +34,7 @@ public class WFSException extends ExceptionClass{
         super(cause);
     }
 
-  /*  public WFSException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }*/
-    
-     public WFSException(Object request, String message, Throwable cause, String code) {
+    public WFSException(Object request, String message, Throwable cause, String code) {
         this(message, cause, code);
         init(request);
     }
@@ -60,14 +59,30 @@ public class WFSException extends ExceptionClass{
             System.out.println("Il parametro request non è null");
             
         }
-        if(request instanceof HttpServletRequest)
+        if(request instanceof HttpServletRequest){
             locator = ((HttpServletRequest)request).getClass().getName();
+            return this;
+        }
         if(request instanceof String){
             System.out.println("il parametro request è: "+ (String)request);
+            locator= ((String)request).getClass().getName();
+            code = (String)request;
+            return this;
+        }
+        if(request instanceof Throwable){
+            System.out.println("il parametro request è: "+ (String)request);
+            locator= ((Throwable)request).getClass().getName();
             code = (String)request;
             return this;
         }
         return this;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+    
+    
     
 }
