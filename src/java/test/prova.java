@@ -4,12 +4,14 @@
  */
 package test;
 
+import java.util.Iterator;
+import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-import net.opengis.ows.getCapabilities.AcceptFormatsType;
+import net.opengis.ows.v_1_0_0.Operation;
 import net.opengis.wfs.v_1_1_0.GetCapabilitiesType;
 import net.opengis.wfs.v_1_1_0.WFSCapabilitiesType;
 
@@ -30,8 +32,8 @@ public class prova {
             Unmarshaller unmarshaller = context.createUnmarshaller();
             
             // GetCapabilities URL of the Demis WorldMap WMS Server
-        String url = "http://localhost:8081/WFS_umb_fab/Servlet_wfs?request=\"GetCapabilities\"&service=\"wfs\"&version=\"1.1.0\"";
-        //String url = "http://schemas.opengis.net/wfs/1.1.0/wfs.xsd";
+        //String url = "http://localhost:8081/WFS_umb_fab/Servlet_wfs?request=\"GetCapabilities\"&service=\"wfs\"&version=\"1.1.0\"";
+        String url = "http://schemas.opengis.net/wfs/1.1.0/examples/WFS_Capabilities_Sample.xml";
         // Unmarshal the given URL, retrieve WMSCapabilities element
         JAXBElement<WFSCapabilitiesType> wfsCapabilitiesElement = unmarshaller
 		.unmarshal(new StreamSource(url), WFSCapabilitiesType.class);
@@ -43,22 +45,21 @@ public class prova {
 		.unmarshal(new StreamSource(url), net.opengis.wfs.v_1_1_0.GetCapabilitiesType.class);
         
         net.opengis.wfs.v_1_1_0.GetCapabilitiesType wfsCapabilities2 = wfsCapabilitiesElement2.getValue();
+        List a = wfsCapabilities.getOperationsMetadata().getOperation();
+        Iterator b = a.iterator();
+        while(b.hasNext()){
+            Operation c = (Operation)b.next();
+            System.out.println("------------------>>>>>"+c.getName());
+        }
+         
         
-        net.opengis.ows.v_1_0_0.AcceptFormatsType accFormat =  wfsCapabilities2.getAcceptFormats();
-        
-        String a = accFormat.getOutputFormat().toString();
-        System.out.println("Formati accettati: "+a);
-        
-        String b = wfsCapabilities2.getAcceptVersions().toString();
-        
-        System.out.println("Versioni accettate: "+b);
         
     }
     
     public void prova2() throws JAXBException{
         JAXBContext context2 = JAXBContext.newInstance("net.opengis.wfs.v_1_1_0");
         GetCapabilitiesType getCap = new GetCapabilitiesType();
-       
+        
         
     }
 
