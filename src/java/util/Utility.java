@@ -264,7 +264,8 @@ public class Utility {
         List<String> appoggio = new ArrayList<String>();
         for (int i = 0; i < valoriParametri.length; i++) {
             //if (i % 2 != 0) {
-            if(valoriParametri[i].startsWith("\"")){
+            
+            if(valoriParametri[i].startsWith("\"") && valoriParametri[i].endsWith("\"")){
                 valoriParametri[i]=valoriParametri[i].substring(1, valoriParametri[i].length()-1);
                 appoggio.add(valoriParametri[i]);
             }else{

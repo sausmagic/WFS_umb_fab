@@ -20,7 +20,11 @@ public class NegotiateVersion {
           //  getSupportedVersion();
         System.out.println("il parametro versione è: "+version);
         System.out.println("il parametro VS_11 è: "+VS_11);
-       // version = version.substring(1,version.length()-1);
+        
+        if(version.startsWith("\"")& version.endsWith("\"")){
+            version = version.substring(1,version.length()-1);
+        }
+        
         System.out.println("il parametro versione è: "+version);
         if(version.equalsIgnoreCase(VS_11)){
             return true;
