@@ -10,7 +10,9 @@ import request.GetCapabilitiesRequest;
 import servlet.RequestResponse;
 
 /**
- *Questa classe procede a processare la richiesta ricevuta (da parte del client)
+ *Questa classe procede a processare la richiesta ricevuta (da parte del client).
+ * Recuperate tutte le informazioni si procede a creare la risposta in formato XML/GML da inviare al client
+ * 
  * @author Umberto
  */
 public class GetCapabilities {

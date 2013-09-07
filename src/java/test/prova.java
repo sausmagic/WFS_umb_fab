@@ -10,6 +10,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import net.opengis.ows.getCapabilities.AcceptFormatsType;
+import net.opengis.wfs.v_1_1_0.GetCapabilitiesType;
 import net.opengis.wfs.v_1_1_0.WFSCapabilitiesType;
 
 
@@ -27,8 +28,10 @@ public class prova {
         JAXBContext context = JAXBContext.newInstance("net.opengis.wfs.v_1_1_0");
         //Use the created JAXB context to construct an unmarshaller
             Unmarshaller unmarshaller = context.createUnmarshaller();
+            
             // GetCapabilities URL of the Demis WorldMap WMS Server
-        String url = "http://localhost:8080/WFS_umb_fab/Servlet_wfs?request=\"GetCapabilities\"&service=\"wfs\"&version=\"1.1.0\"";
+        String url = "http://localhost:8081/WFS_umb_fab/Servlet_wfs?request=\"GetCapabilities\"&service=\"wfs\"&version=\"1.1.0\"";
+        //String url = "http://schemas.opengis.net/wfs/1.1.0/wfs.xsd";
         // Unmarshal the given URL, retrieve WMSCapabilities element
         JAXBElement<WFSCapabilitiesType> wfsCapabilitiesElement = unmarshaller
 		.unmarshal(new StreamSource(url), WFSCapabilitiesType.class);
@@ -49,6 +52,13 @@ public class prova {
         String b = wfsCapabilities2.getAcceptVersions().toString();
         
         System.out.println("Versioni accettate: "+b);
+        
+    }
+    
+    public void prova2() throws JAXBException{
+        JAXBContext context2 = JAXBContext.newInstance("net.opengis.wfs.v_1_1_0");
+        GetCapabilitiesType getCap = new GetCapabilitiesType();
+       
         
     }
 
