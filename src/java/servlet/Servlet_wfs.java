@@ -44,11 +44,13 @@ public class Servlet_wfs extends HttpServlet {
         System.out.println("METODO: "+requestMethod);
         boolean doGet = (requestMethod.equalsIgnoreCase("post"));
         
+        /**
         try {
             prova c = new prova();
         } catch (JAXBException ex) {
             Logger.getLogger(Servlet_wfs.class.getName()).log(Level.SEVERE, null, ex);
         }
+        **/
        
         System.out.println("DOGET: "+doGet);
         

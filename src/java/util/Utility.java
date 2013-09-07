@@ -45,7 +45,7 @@ public class Utility {
         } else {*/
             richiest = richiesta;
         //}
-        System.out.println("la richiesta è:aaaaaaa " + richiest);
+        System.out.println("la richiesta è: " + richiest);
         if (richiest.equalsIgnoreCase("GetCapabilities")) {
             GetCapabilitiesRequest capabilitiesRequest = new GetCapabilitiesRequest(request);
             System.out.println("Versione accettata= " + capabilitiesRequest.getVersion());
