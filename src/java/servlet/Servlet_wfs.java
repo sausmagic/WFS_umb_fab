@@ -10,10 +10,14 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBException;
+import test.prova;
 import util.Utility;
 
 /**
@@ -47,7 +51,7 @@ public class Servlet_wfs extends HttpServlet {
         System.out.println("DOGET: "+doGet);
         
         utility = new Utility();
-        
+               
         if(!doGet){
             utility.parsingGetParam(request, response);     
         }

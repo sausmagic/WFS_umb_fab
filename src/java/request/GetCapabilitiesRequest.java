@@ -41,7 +41,8 @@ public class GetCapabilitiesRequest {
         //analizzo i parametri
         if (parametriRichiesta.get("request")==null || parametriRichiesta.get("service")==null)
              throw new WFSException(request,"Errore non sono stati definiti uno o più dei parametri mandatory", null, "MissingParameterValue");
-        
+        System.out.println("il parametro request è: "+parametriRichiesta.get("request")[0]);
+        System.out.println("il parametro service è: "+parametriRichiesta.get("service")[0]);
         this.setRequest(parametriRichiesta.get("request")[0]);
         this.setService(parametriRichiesta.get("service")[0]);
         
@@ -50,7 +51,7 @@ public class GetCapabilitiesRequest {
             boolean acceptedVer = NegotiateVersion.acceptedVersion(this.getVersion());
             System.out.println("La versione "+this.getVersion()+" è accettata dal server?: "+acceptedVer);
             if(!acceptedVer)
-            throw new WFSException(request,"Errore versione non supportata dal server", null, "UnsupportedVersionFromServer");
+                throw new WFSException(request,"Errore versione non supportata dal server", null, "UnsupportedVersionFromServer");
         }else{
             this.setVersion(NegotiateVersion.getSupportedVersion());
             System.out.println("Ho settato la versione supportata dal server in quanto non specificata dal client. Versione supportata " + NegotiateVersion.getSupportedVersion());
