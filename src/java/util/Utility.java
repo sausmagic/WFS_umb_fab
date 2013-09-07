@@ -39,12 +39,13 @@ public class Utility {
 
         String richiest;
 
-        if (richiesta.startsWith("\"")) {
+       /* if (richiesta.startsWith("\"")) {
             richiest = richiesta.substring(1, richiesta.length() - 1);
             System.out.println("mi trovo nel metodoche richiama la classe GetCapabilitiesRequest il parametro richiesta è: " + richiest);
-        } else {
+        } else {*/
             richiest = richiesta;
-        }
+        //}
+        System.out.println("la richiesta è:aaaaaaa " + richiest);
         if (richiest.equalsIgnoreCase("GetCapabilities")) {
             GetCapabilitiesRequest capabilitiesRequest = new GetCapabilitiesRequest(request);
             System.out.println("Versione accettata= " + capabilitiesRequest.getVersion());
@@ -303,12 +304,12 @@ public class Utility {
      */
     private String cosavuole(Map params) throws IndexOutOfBoundsException {
         String risposta;
-        if(((String[])(params.get("service")))[0].equalsIgnoreCase("GetCapabilities")){
+        if(((String[])(params.get("request")))[0].equalsIgnoreCase("GetCapabilities")){
             risposta = "Vuole sapere il GetCapabilities";
-            System.out.println("********************* " + ((String[])(params.get("service")))[0]);
+            System.out.println("********************* " + ((String[])(params.get("request")))[0]);
         }else{
             risposta = "non so che vuole";
-            System.out.println("********************* non so cosa vuole " + ((String[])(params.get("service")))[0]);
+            System.out.println("********************* non so cosa vuole " + ((String[])(params.get("request")))[0]);
         }
         return risposta;
             }
