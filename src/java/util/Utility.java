@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import request.GetCapabilitiesRequest;
 import servlet.RequestResponse;
 
@@ -265,7 +264,12 @@ public class Utility {
         List<String> appoggio = new ArrayList<String>();
         for (int i = 0; i < valoriParametri.length; i++) {
             //if (i % 2 != 0) {
+            if(valoriParametri[i].startsWith("\"")){
+                valoriParametri[i]=valoriParametri[i].substring(1, valoriParametri[i].length()-1);
                 appoggio.add(valoriParametri[i]);
+            }else{
+                appoggio.add(valoriParametri[i]);
+            }
             //}
         }
         
