@@ -172,6 +172,10 @@ public class Utility {
         while (i.hasNext()) {
             String key = (String) i.next();
             String value = ((String[]) params.get(key))[0];
+            if(value.startsWith("\"")&value.endsWith("\"")){
+                value = value.substring(1, value.length()-1);
+                System.out.println("SONO NEL POST:"+value);
+            }
             if (key.equalsIgnoreCase("request")) {
                 richiesta = value;
                 System.out.println("IL VALORE DELLA REQUEST è:"+richiesta);
@@ -309,7 +313,11 @@ public class Utility {
      */
     private String cosavuole(Map params) throws IndexOutOfBoundsException {
         String risposta;
-        if(((String[])(params.get("request")))[0].equalsIgnoreCase("GetCapabilities")){
+        String richiesta;
+        richiesta = ((String[])(params.get("request")))[0];
+        if(richiesta.startsWith("\"")&richiesta.endsWith("\""))
+            richiesta = richiesta.substring(1,richiesta.length()-1);
+        if(richiesta.equalsIgnoreCase("GetCapabilities")){
             risposta = "Vuole sapere il GetCapabilities";
             System.out.println("********************* " + ((String[])(params.get("request")))[0]);
         }else{
