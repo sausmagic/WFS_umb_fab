@@ -48,6 +48,10 @@ public class Utility {
             GetCapabilitiesRequest capabilitiesRequest = new GetCapabilitiesRequest(request);
             System.out.println("Versione accettata= " + capabilitiesRequest.getVersion());
         }
+        if(richiest.isEmpty()){
+            System.out.println("La request è vuota");
+            throw new WFSException(request, "Errore non sono stati definiti i parametri obbligatori", null, "MissingParameterValue");
+        }
 
     }
 
@@ -169,6 +173,7 @@ public class Utility {
             String value = ((String[]) params.get(key))[0];
             if (key.equalsIgnoreCase("request")) {
                 richiesta = value;
+                System.out.println("IL VALORE DELLA REQUEST è:"+richiesta);
             }
             if (key.equalsIgnoreCase("service")) {
                 service = value;
@@ -193,10 +198,12 @@ public class Utility {
         /**
          * identifico la richiesta del client specificato nel parametro
          * "request"
+         * inizializzo la RequestResponse che mi permette di mantenere una connessione attiva
          */
         RequestResponse reqResp = new RequestResponse(request, response);
 
         try {
+            System.out.println("entro nel metodo requestOperation per vedere di che operazione il client ha fatto richiesta");
             requestOperation(richiesta, reqResp);
 
            // String risposta = cosavuole(richiesta + service + version);
@@ -286,9 +293,10 @@ public class Utility {
     }
 
     /**
-     * 
-     * @param params
-     * @return 
+     * Richiamato quando viene utilizzato il metodo POST della servlet
+     * Questo metodo serve solo come prova di utilizzo
+     * @param params include i paramatri specificati dal client
+     * @return una stringa contenente il nome del service specificato
      */
     private String cosavuole(Map params) throws IndexOutOfBoundsException {
         String risposta;
@@ -297,7 +305,7 @@ public class Utility {
             System.out.println("********************* " + ((String[])(params.get("service")))[0]);
         }else{
             risposta = "non so che vuole";
-            System.out.println("********************* " + ((String[])(params.get("service")))[0]);
+            System.out.println("********************* non so cosa vuole " + ((String[])(params.get("service")))[0]);
         }
         return risposta;
             }

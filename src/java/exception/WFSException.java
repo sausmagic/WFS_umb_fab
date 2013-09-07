@@ -5,7 +5,6 @@
 package exception;
 
 import javax.servlet.http.HttpServletRequest;
-import request.GetCapabilitiesRequest;
 
 /**
  *

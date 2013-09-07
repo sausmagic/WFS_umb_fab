@@ -10,16 +10,16 @@ import request.GetCapabilitiesRequest;
 import servlet.RequestResponse;
 
 /**
- *
+ *Questa classe procede a processare la richiesta ricevuta (da parte del client)
  * @author Umberto
  */
 public class GetCapabilities {
 
-    /**
-     * 
-     * @param aThis
-     * @param request 
-     */
+  /**
+   * 
+   * @param request istanza dell'oggetto GetCapabilitiesRequest che mantiene i dati delle informazioni richieste dal cleint
+   * @param reqRes mantiene l'istanza di request/response della servlet
+   */
     public GetCapabilities(GetCapabilitiesRequest request, RequestResponse reqRes) {
       
     }

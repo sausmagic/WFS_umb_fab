@@ -6,7 +6,6 @@ package request;
 
 import exception.WFSException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,10 +34,12 @@ public class GetCapabilitiesRequest {
         this.init();
         
         //estraggo i parametri della richiesta
-        Map<String,String[]> parametriRichiesta = new HashMap<String, String[]>();
+        Map<String,String[]> parametriRichiesta;
         parametriRichiesta = request.getRequest().getParameterMap();
         
         //analizzo i parametri
+        System.out.println("I parametri di richiesta contiene qualcosa: "+parametriRichiesta.isEmpty());
+        
         if (parametriRichiesta.get("request")==null || parametriRichiesta.get("service")==null)
              throw new WFSException(request,"Errore non sono stati definiti uno o più dei parametri mandatory", null, "MissingParameterValue");
         System.out.println("il parametro request è: "+parametriRichiesta.get("request")[0]);
