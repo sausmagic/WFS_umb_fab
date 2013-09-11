@@ -8,6 +8,9 @@ import exception.WFSException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import net.opengis.ows.v_1_0_0.ExceptionReport;
+import net.opengis.ows.v_1_0_0.ExceptionType;
+import net.opengis.ows.v_1_0_0.ObjectFactory;
 
 import servlet.RequestResponse;
 import wfs.GetCapabilities;
@@ -40,8 +43,12 @@ public class GetCapabilitiesRequest {
         //analizzo i parametri
         System.out.println("I parametri di richiesta contiene qualcosa: "+parametriRichiesta.isEmpty());
         
-        if (parametriRichiesta.get("request")==null || parametriRichiesta.get("service")==null)
+        if (parametriRichiesta.get("request")== null || parametriRichiesta.get("service")== null)
              throw new WFSException(request,"Errore non sono stati definiti uno o più dei parametri mandatory", null, "MissingParameterValue");
+        //ObjectFactory exception = new ObjectFactory();
+        //ExceptionReport exRep = exception.createExceptionReport();
+        //ExceptionType exType = exception.createExceptionType();
+       
         System.out.println("il parametro request è: "+parametriRichiesta.get("request")[0]);
         System.out.println("il parametro service è: "+parametriRichiesta.get("service")[0]);
         this.setRequest(parametriRichiesta.get("request")[0]);
