@@ -38,13 +38,14 @@ public class prova {
         JAXBElement<WFSCapabilitiesType> wfsCapabilitiesElement = unmarshaller
 		.unmarshal(new StreamSource(url), WFSCapabilitiesType.class);
         WFSCapabilitiesType wfsCapabilities = wfsCapabilitiesElement.getValue();
+        
           
         System.out.println("òòòòòòòòòòòòòòòòòòòòòòò"+wfsCapabilities.getVersion());
         
-        JAXBElement<net.opengis.wfs.v_1_1_0.GetCapabilitiesType> wfsCapabilitiesElement2 = unmarshaller
-		.unmarshal(new StreamSource(url), net.opengis.wfs.v_1_1_0.GetCapabilitiesType.class);
+        //JAXBElement<net.opengis.wfs.v_1_1_0.GetCapabilitiesType> wfsCapabilitiesElement2 = unmarshaller
+	//	.unmarshal(new StreamSource(url), net.opengis.wfs.v_1_1_0.GetCapabilitiesType.class);
         
-        net.opengis.wfs.v_1_1_0.GetCapabilitiesType wfsCapabilities2 = wfsCapabilitiesElement2.getValue();
+        //net.opengis.wfs.v_1_1_0.GetCapabilitiesType wfsCapabilities2 = wfsCapabilitiesElement2.getValue();
         List a = wfsCapabilities.getOperationsMetadata().getOperation();
         Iterator b = a.iterator();
         while(b.hasNext()){

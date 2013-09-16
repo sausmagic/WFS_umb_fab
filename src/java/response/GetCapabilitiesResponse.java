@@ -4,7 +4,6 @@
  */
 package response;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import javax.xml.bind.JAXBException;
 import net.opengis.ows.v_1_0_0.CodeType;
 import net.opengis.ows.v_1_0_0.KeywordsType;
 import net.opengis.ows.v_1_0_0.ServiceIdentification;
-import net.opengis.wfs.v_1_1_0.GetCapabilitiesType;
 import net.opengis.wfs.v_1_1_0.WFSCapabilitiesType;
 import request.GetCapabilitiesRequest;
 import servlet.RequestResponse;
@@ -66,6 +64,7 @@ public class GetCapabilitiesResponse {
         accessConstList.add("none");
         serviceIdent.setAccessConstraints(accessConstList);
         getCapabilitieResp.setServiceIdentification(serviceIdent);
+        
           //Facciamo una prova
         try {
           FileOutputStream a;

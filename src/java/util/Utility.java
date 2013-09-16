@@ -349,7 +349,8 @@ public class Utility {
             Marshaller jaxbMarshaller = context.createMarshaller();
             // output pretty printed
 	    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            //jaxbMarshaller.marshal(classe, file);
+            jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://schemas.opengis.net/wfs/1.1.0/wfs.xsd");
+            jaxbMarshaller.marshal(classe, file);
 	    jaxbMarshaller.marshal(classe, System.out);
         
     return file;
