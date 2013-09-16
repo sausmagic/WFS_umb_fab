@@ -9,6 +9,7 @@ import exception.WFSException;
 import net.opengis.ows.v_1_0_0.ServiceIdentification;
 import net.opengis.wfs.v_1_1_0.WFSCapabilitiesType;
 import request.GetCapabilitiesRequest;
+import response.GetCapabilitiesResponse;
 import servlet.RequestResponse;
 
 /**
@@ -19,6 +20,7 @@ import servlet.RequestResponse;
  */
 public class GetCapabilities {
 
+    GetCapabilitiesResponse getCapResponse;
   /**
    * Nel costruttore andremo a creare l'oggetto di risposta alla richiesta
    * 
@@ -27,12 +29,6 @@ public class GetCapabilities {
    */
     public GetCapabilities(GetCapabilitiesRequest request, RequestResponse reqRes) {
       
-        WFSCapabilitiesType wfscapabilities = new WFSCapabilitiesType();
-        wfscapabilities.setVersion(request.getVersion());
-        
-        //Definiamo qui il ServiceIdentification
-        ServiceIdentification serviceIdent = new ServiceIdentification();
-        serviceIdent.setTitle("WFS SriLanka");
         
     }
     

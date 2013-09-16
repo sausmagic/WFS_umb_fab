@@ -11,6 +11,7 @@ import java.util.Map;
 import net.opengis.ows.v_1_0_0.ExceptionReport;
 import net.opengis.ows.v_1_0_0.ExceptionType;
 import net.opengis.ows.v_1_0_0.ObjectFactory;
+import response.GetCapabilitiesResponse;
 
 import servlet.RequestResponse;
 import wfs.GetCapabilities;
@@ -110,7 +111,7 @@ public class GetCapabilitiesRequest {
          * una volta costruita la request il server analizza i dati e procederà a eseguire la response
          * al client
          */
-        GetCapabilities getCapabilities = new GetCapabilities(this, request);
+        GetCapabilitiesResponse getCapabilities = new GetCapabilitiesResponse(this, request);
         
     }
     /**

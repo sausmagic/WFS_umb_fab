@@ -8,6 +8,9 @@
 package util;
 
 import exception.WFSException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,7 +19,12 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import net.opengis.wfs.v_1_1_0.WFSCapabilitiesType;
 import request.GetCapabilitiesRequest;
+import response.GetCapabilitiesResponse;
 import servlet.RequestResponse;
 
 /**
@@ -326,4 +334,24 @@ public class Utility {
         }
         return risposta;
             }
+    
+    /**
+     * Metodo di supporto che prende un oggetto e controlla con istanceof che tipo di oggetto è, successivamente procede
+     * a fare il murshalling dei dati utilizzando JAXB.
+     * 
+     * @param classe
+     * @return 
+     */
+    public FileOutputStream createXML(WFSCapabilitiesType classe) throws JAXBException, FileNotFoundException{
+        FileOutputStream file = new FileOutputStream("GetCapabilitiesResponse.xml");
+        
+            JAXBContext context = JAXBContext.newInstance("net.opengis.wfs.v_1_1_0");
+            Marshaller jaxbMarshaller = context.createMarshaller();
+            // output pretty printed
+	    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            //jaxbMarshaller.marshal(classe, file);
+	    jaxbMarshaller.marshal(classe, System.out);
+        
+    return file;
+    }
 }
