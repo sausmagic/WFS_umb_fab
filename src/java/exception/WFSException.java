@@ -4,7 +4,10 @@
  */
 package exception;
 
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import servlet.RequestResponse;
+import wfs.NegotiateVersion;
 
 /**
  *
@@ -50,7 +53,7 @@ public class WFSException extends ExceptionClass{
     }
 
     /**
-     * 
+     * Sono da rivedere alcune cose sulle eccezioni
      * @param request 
      */
     private WFSException init(Object request) {
@@ -63,10 +66,28 @@ public class WFSException extends ExceptionClass{
             locator = ((HttpServletRequest)request).getClass().getName();
             return this;
         }
+        if(request instanceof RequestResponse){
+            //estraggo i parametri della richiesta
+            System.out.println("Sono in WFSException e la request è di tipo REQUESTRESPONSE");
+            Map<String,String[]> parametriRichiesta;
+            parametriRichiesta = ((RequestResponse)request).getRequest().getParameterMap();
+            if (parametriRichiesta.get("request")== null){
+                code = ExceptionClass.MISSING_PARAMETER_VALUE;
+                locator="request";
+            }else if(parametriRichiesta.get("service")== null){
+                code = ExceptionClass.MISSING_PARAMETER_VALUE;
+                locator="service";
+            }else if(parametriRichiesta.get("version")[0] != "1.1.0"){
+                code = "UnsupportedVersionFromServer";
+                locator="version";
+            }
+            return this;
+        }
         if(request instanceof String){
-            System.out.println("il parametro request è: "+ (String)request);
-            locator= ((String)request).getClass().getName();
-            code = (String)request;
+            if(((String)request).equalsIgnoreCase("UnsupportedVersionFromServer")){
+                code = "UnsupportedVersionFromServer";
+                locator="version";
+            }
             return this;
         }
         if(request instanceof Throwable){

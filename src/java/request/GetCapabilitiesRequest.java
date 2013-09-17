@@ -108,8 +108,8 @@ public class GetCapabilitiesRequest {
         
        
         /**
-         * una volta costruita la request il server analizza i dati e procederà a eseguire la response
-         * al client
+         * una volta costruita la request il server analizza i dati della richiesta, procederà a eseguire la response
+         * al client richiamando la classe GetCapabilitiesrResponse che procederà a creare i dati per la risposta.
          */
         GetCapabilitiesResponse getCapabilities = new GetCapabilitiesResponse(this, request);
         

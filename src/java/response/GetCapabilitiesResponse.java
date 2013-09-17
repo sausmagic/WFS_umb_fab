@@ -10,12 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.namespace.QName;
 import net.opengis.ows.v_1_0_0.AddressType;
 import net.opengis.ows.v_1_0_0.CodeType;
 import net.opengis.ows.v_1_0_0.ContactType;
+import net.opengis.ows.v_1_0_0.DCP;
+import net.opengis.ows.v_1_0_0.HTTP;
 import net.opengis.ows.v_1_0_0.KeywordsType;
 import net.opengis.ows.v_1_0_0.OnlineResourceType;
+import net.opengis.ows.v_1_0_0.Operation;
+import net.opengis.ows.v_1_0_0.OperationsMetadata;
+import net.opengis.ows.v_1_0_0.RequestMethodType;
 import net.opengis.ows.v_1_0_0.ResponsiblePartySubsetType;
 import net.opengis.ows.v_1_0_0.ServiceIdentification;
 import net.opengis.ows.v_1_0_0.ServiceProvider;
@@ -130,6 +137,36 @@ public class GetCapabilitiesResponse {
         //FINE - SERVICE PROVIDER SECTION
         
         //INIZIO - OPERATION METADATA SECTION
+        
+        OperationsMetadata OM = new OperationsMetadata();
+        List<Operation> operationList = new ArrayList<Operation>();
+        Operation operation1 = new Operation();
+        operation1.setName("GetCapabilities");
+        operationList.add(operation1);
+        List<DCP> dcpList = new ArrayList<DCP>();
+        DCP dcp1 = new DCP();
+        HTTP http1 = new HTTP();
+        
+        QName namespace1 = new QName("http://www.w3.org/1999/xlink","GET");
+        
+        RequestMethodType b = new RequestMethodType();
+        b.setTitle("GET");
+        b.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
+        JAXBElement<RequestMethodType> getOrPost = new JAXBElement<RequestMethodType>(namespace1,RequestMethodType.class,null,b);
+        List<JAXBElement<RequestMethodType>> listGetOrSet = new ArrayList<JAXBElement<RequestMethodType>>();
+        listGetOrSet.add(getOrPost);
+        http1.setGetOrPost(listGetOrSet);
+        dcp1.setHTTP(http1);
+        //aggiungo i campi dcp alla listDCP
+        dcpList.add(dcp1);
+        operation1.setDCP(dcpList);
+        
+        //setto le Operation
+        OM.setOperation(operationList);
+        
+        
+        getCapabilitieResp.setOperationsMetadata(OM);
+        //FINE - OPERATION METADATA SECTION
         
         
         
