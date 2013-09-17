@@ -91,7 +91,7 @@ public class WFSCapabilitiesType
     protected GMLObjectTypeListType servesGMLObjectTypeList;
     @XmlElement(name = "SupportsGMLObjectTypeList")
     protected GMLObjectTypeListType supportsGMLObjectTypeList;
-    @XmlElement(name = "Filter_Capabilities", namespace = "http://www.opengis.net/ogc", required = true)
+    @XmlElement(name = "Filter_Capabilities", namespace = "http://www.opengis.net/ogc", required = true )
     protected FilterCapabilities filterCapabilities;
 
     /**

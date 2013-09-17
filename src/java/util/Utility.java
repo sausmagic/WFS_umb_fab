@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import net.opengis.ows.v_1_0_0.ExceptionReport;
+import net.opengis.ows.v_1_0_0.ExceptionType;
 import net.opengis.wfs.v_1_1_0.WFSCapabilitiesType;
 import request.GetCapabilitiesRequest;
 import response.GetCapabilitiesResponse;
@@ -76,7 +78,7 @@ public class Utility {
      * @return
      * @throws IOException
      */
-    public void parsingGetParam(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void parsingGetParam(HttpServletRequest request, HttpServletResponse response) throws IOException, JAXBException {
 
         String richiesta = new String();
         String service = new String();
@@ -154,6 +156,7 @@ public class Utility {
             wr.println("<h2>" + e.getMessage() + "</h2>");
             wr.println("</body>");
             wr.println("</html>");
+            createXML(e);
         }
 
 
@@ -165,7 +168,7 @@ public class Utility {
      * @param request
      * @param response
      */
-    public void parsingPostParam(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void parsingPostParam(HttpServletRequest request, HttpServletResponse response) throws IOException, JAXBException {
         String richiesta = new String();
         String service = new String();
         String version = new String();
@@ -250,6 +253,7 @@ public class Utility {
             wr.println("<h2>" + e.getMessage() + "</h2>");
             wr.println("</body>");
             wr.println("</html>");
+            createXML(e);
         }
     }
 
@@ -342,17 +346,46 @@ public class Utility {
      * @param classe
      * @return 
      */
-    public FileOutputStream createXML(WFSCapabilitiesType classe) throws JAXBException, FileNotFoundException{
-        FileOutputStream file = new FileOutputStream("GetCapabilitiesResponse.xml");
+    public FileOutputStream createXML(Object classe) throws JAXBException, FileNotFoundException{
         
+        FileOutputStream file = null;
+        if(classe instanceof WFSCapabilitiesType){
+            //file = new FileOutputStream("C:\\Users\\Umberto\\GetCapabilitiesResponse.xml");
+            file = new FileOutputStream("GetCapabilitiesResponse.xml");
             JAXBContext context = JAXBContext.newInstance("net.opengis.wfs.v_1_1_0");
             Marshaller jaxbMarshaller = context.createMarshaller();
             // output pretty printed
 	    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://schemas.opengis.net/wfs/1.1.0/wfs.xsd");
-            jaxbMarshaller.marshal(classe, file);
-	    jaxbMarshaller.marshal(classe, System.out);
-        
+            //jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://schemas.opengis.net/wfs/1.1.0/wfs.xsd");
+            jaxbMarshaller.marshal((WFSCapabilitiesType)classe, file);
+	    jaxbMarshaller.marshal((WFSCapabilitiesType)classe, System.out);
+        }
+        /**
+         * Se l'oggetto classe è del tipo WFSException vuol dire
+         * che è avvenuto un errore ed è stata lanciata una eccezione
+         */
+        if (classe instanceof WFSException){
+            file = new FileOutputStream("ExceptionReport.xml");
+            ExceptionReport ER = new ExceptionReport();
+            ExceptionType ET = new ExceptionType();
+            ET.setExceptionCode(((WFSException)classe).getCode());
+            ET.setLocator(((WFSException)classe).getLocator());
+            
+            List<String> ExcText = new ArrayList<String>();
+            ExcText.add(((WFSException)classe).getMessage());
+            ET.setExceptionText(ExcText);
+            
+            List<ExceptionType> listException = new ArrayList<ExceptionType>();
+            listException.add(ET);
+            ER.setException(listException);
+            
+            JAXBContext context = JAXBContext.newInstance("net.opengis.ows.v_1_0_0");
+            Marshaller jaxbMarshaller = context.createMarshaller();
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            jaxbMarshaller.marshal(ER, file);
+	    jaxbMarshaller.marshal(ER, System.out);
+        }
     return file;
+    
     }
 }

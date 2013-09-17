@@ -37,7 +37,7 @@ public class GetCapabilitiesResponse {
         //Definiamo qui il ServiceIdentification
         ServiceIdentification serviceIdent = new ServiceIdentification();
         serviceIdent.setTitle("WFS SriLanka");
-        serviceIdent.setAbstract("Questo Server WFS forniscefunzionalita sulle feature per il progetto Sri Lanka."
+        serviceIdent.setAbstract("Questo Server WFS fornisce funzionalità sulle feature per il progetto Sri Lanka."
                 + "Le feature afferte riguardano le fattorie, i mercati, le città ed altro. Contact Umberto");
         CodeType codetype1 = new CodeType();
         codetype1.setValue("WFS");
@@ -65,11 +65,12 @@ public class GetCapabilitiesResponse {
         serviceIdent.setAccessConstraints(accessConstList);
         getCapabilitieResp.setServiceIdentification(serviceIdent);
         
+        
           //Facciamo una prova
         try {
           FileOutputStream a;
             a = util.createXML(getCapabilitieResp);
-            System.out.println(a);
+            System.out.println(a.toString());
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GetCapabilitiesResponse.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JAXBException ex) {
