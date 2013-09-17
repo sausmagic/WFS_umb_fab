@@ -17,6 +17,7 @@ import net.opengis.ows.v_1_0_0.AddressType;
 import net.opengis.ows.v_1_0_0.CodeType;
 import net.opengis.ows.v_1_0_0.ContactType;
 import net.opengis.ows.v_1_0_0.DCP;
+import net.opengis.ows.v_1_0_0.DomainType;
 import net.opengis.ows.v_1_0_0.HTTP;
 import net.opengis.ows.v_1_0_0.KeywordsType;
 import net.opengis.ows.v_1_0_0.OnlineResourceType;
@@ -160,6 +161,33 @@ public class GetCapabilitiesResponse {
         //aggiungo i campi dcp alla listDCP
         dcpList.add(dcp1);
         operation1.setDCP(dcpList);
+        List<DomainType> parameterList = new ArrayList<DomainType>();
+        DomainType domainType1 = new DomainType();
+        domainType1.setName("AcceptVersions");
+        List<String> versionList = new ArrayList<String>();
+        versionList.add("1.1.0");
+        domainType1.setValue(versionList);
+        DomainType domainType2 = new DomainType();
+        domainType2.setName("AcceptFormats");
+        List<String> acceptFormatList = new ArrayList<String>();
+        acceptFormatList.add("text/xml");
+        domainType2.setValue(acceptFormatList);
+        parameterList.add(domainType1);
+        parameterList.add(domainType2);
+        DomainType domainType3 = new DomainType();
+        domainType3.setName("Sections");
+        List<String> sectionList = new ArrayList<String>();
+        //per ora le mettiamo tutte poi vediamo quale fare oltre a quelle per un WFS BASIC
+        sectionList.add("ServiceIdentification");
+        sectionList.add("ServiceProvider");
+        sectionList.add("OperationsMetadata");
+        sectionList.add("FeatureTypeList");
+        sectionList.add("ServesGMLObjectTypeList");
+        sectionList.add("SupportsGMLObjectTypeList");
+        sectionList.add("Filter_Capabilities");
+        domainType3.setValue(sectionList);
+        parameterList.add(domainType3);
+        operation1.setParameter(parameterList);
         
         //setto le Operation
         OM.setOperation(operationList);
