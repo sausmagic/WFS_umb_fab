@@ -4,12 +4,18 @@
  */
 package response;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletOutputStream;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
@@ -43,10 +49,15 @@ public class GetCapabilitiesResponse {
     GetCapabilitiesRequest request;
     RequestResponse servlet;
     Utility util;
+    FileOutputStream a;
     
     public GetCapabilitiesResponse(GetCapabilitiesRequest request, RequestResponse servlet) {
         //inizializziamo gli oggetti della classe
         init(request,servlet);
+        
+        }
+    
+    public FileOutputStream getCapabilitiesResponseXML(){
         getCapabilitieResp.setVersion(request.getVersion());
         
         //Definiamo qui il ServiceIdentification
@@ -201,24 +212,39 @@ public class GetCapabilitiesResponse {
         
           //Facciamo una prova
         try {
-          FileOutputStream a;
             a = util.createXML(getCapabilitieResp);
-            System.out.println(a.toString());
+            File file = new File("GetCapabilitiesResponse.xml");
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
+                while(line!=null) {
+                    //System.out.println(line);
+                    
+                    //servlet.getResponse().setContentType("text/html;charset=UTF-8");
+                    servlet.getResponse().setContentType("text/xml;charset=UTF-8");
+                    //PrintWriter out = servlet.getResponse().getWriter();
+                    ServletOutputStream out = servlet.getResponse().getOutputStream();
+                   // servlet.getResponse().sendRedirect(file.getAbsolutePath());
+                    out.println(line);
+                    line = reader.readLine();
+                }
+              
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GetCapabilitiesResponse.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JAXBException ex) {
             Logger.getLogger(GetCapabilitiesResponse.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GetCapabilitiesResponse.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
-        
-        }
+        return a;
+    }
 
     private void init(GetCapabilitiesRequest request, RequestResponse servlet) {
         this.request = request;
         this.servlet = servlet;
         getCapabilitieResp = new WFSCapabilitiesType();
         util = new Utility();
+        
     }
     
 }

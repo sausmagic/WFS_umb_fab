@@ -8,9 +8,12 @@
 package util;
 
 import exception.WFSException;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -36,6 +39,7 @@ import servlet.RequestResponse;
  */
 public class Utility {
 
+    private FileOutputStream xmlResponseGetCapabilitiesRequest;
     /**
      * Questo metodo identifica il tipo di richiesta effettuata dal client in
      * base alla richiesta ricevuta in input il server provvederà a richiamare
@@ -58,6 +62,9 @@ public class Utility {
         if (richiest.equalsIgnoreCase("GetCapabilities")) {
             GetCapabilitiesRequest capabilitiesRequest = new GetCapabilitiesRequest(request);
             System.out.println("Versione accettata= " + capabilitiesRequest.getVersion());
+            //xmlResponseGetCapabilitiesRequest = capabilitiesRequest.getResponseGetCapabilitiesRequest();
+          
+            
         }
         if(richiest.isEmpty()){
             System.out.println("La request è vuota");
@@ -126,7 +133,9 @@ public class Utility {
             requestOperation(richiesta, reqResp);
 
             String risposta = cosavuole(richiesta +"&"+ service + "&" + version);
+            
             //String risposta = cosavuole(params);
+            /**
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
             try {
@@ -143,8 +152,9 @@ public class Utility {
             } finally {
                 out.close();
             }
+             **/
         } catch (WFSException e) {
-            response.setContentType("text/html;charset=UTF-8");
+            /**response.setContentType("text/html;charset=UTF-8");
             PrintWriter wr = response.getWriter();
             wr.println("<!DOCTYPE html>");
             wr.println("<html>");
@@ -156,7 +166,18 @@ public class Utility {
             wr.println("<h2>" + e.getMessage() + "</h2>");
             wr.println("</body>");
             wr.println("</html>");
-            createXML(e);
+            * **/
+            xmlResponseGetCapabilitiesRequest = createXML(e);
+            File file = new File("ExceptionReport.xml");
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
+                while(line!=null) {
+                    //System.out.println(line);
+                    response.setContentType("text/html;charset=UTF-8");
+                    PrintWriter out = response.getWriter();
+                    out.println(line);
+                    line = reader.readLine();
+        }
         }
 
 
@@ -384,6 +405,7 @@ public class Utility {
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             jaxbMarshaller.marshal(ER, file);
 	    jaxbMarshaller.marshal(ER, System.out);
+            
         }
     return file;
     

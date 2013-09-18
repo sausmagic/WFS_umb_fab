@@ -5,6 +5,7 @@
 package request;
 
 import exception.WFSException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class GetCapabilitiesRequest {
     
     private String request,service,version, updateSequence;
     private List<String> sections, acceptFormat,acceptLenguage;
-    
+    FileOutputStream xmlResponseGetCapabilitiesRequest;
     
     /**
      * 
@@ -112,6 +113,7 @@ public class GetCapabilitiesRequest {
          * al client richiamando la classe GetCapabilitiesrResponse che procederà a creare i dati per la risposta.
          */
         GetCapabilitiesResponse getCapabilities = new GetCapabilitiesResponse(this, request);
+        xmlResponseGetCapabilitiesRequest = getCapabilities.getCapabilitiesResponseXML();
         
     }
     /**
@@ -197,5 +199,14 @@ public class GetCapabilitiesRequest {
         acceptFormat = new ArrayList<String>();
         acceptLenguage = new ArrayList<String>();
                 
+    }
+    
+    /**
+     * Questo metodo viene richiamato una volta che la richiesta del client è stata analizzata.
+     * Una volta analizzata la request, verrà richiamata la classe che procederà a creare la risposta in formato xml
+     * @return xmlResponseGetCapabilitiesRequest stream di dati in formato xml salvato in un file locale.
+     */
+    public FileOutputStream getResponseGetCapabilitiesRequest(){
+        return xmlResponseGetCapabilitiesRequest;
     }
 }
