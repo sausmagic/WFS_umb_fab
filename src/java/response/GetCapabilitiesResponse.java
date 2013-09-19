@@ -200,6 +200,75 @@ public class GetCapabilitiesResponse {
         parameterList.add(domainType3);
         operation1.setParameter(parameterList);
         
+        //operazione describe feature type
+        Operation operation2 = new Operation();
+        operation2.setName("DescribeFeatureType");
+        operationList.add(operation2);
+        List<DCP> dcpList2 = new ArrayList<DCP>();
+        DCP dcp2 = new DCP();
+        HTTP http2 = new HTTP();
+        
+        QName namespace2 = new QName("http://www.w3.org/1999/xlink","GET");
+        
+        RequestMethodType c = new RequestMethodType();
+        c.setTitle("GET");
+        c.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
+        JAXBElement<RequestMethodType> getOrPost2 = new JAXBElement<RequestMethodType>(namespace2,RequestMethodType.class,null,c);
+        List<JAXBElement<RequestMethodType>> listGetOrSet2 = new ArrayList<JAXBElement<RequestMethodType>>();
+        listGetOrSet2.add(getOrPost2);
+        http2.setGetOrPost(listGetOrSet2);
+        dcp2.setHTTP(http2);
+        //aggiungo i campi dcp alla listDCP
+        dcpList2.add(dcp2);
+        operation2.setDCP(dcpList2);
+        List<DomainType> parameterList2 = new ArrayList<DomainType>();
+        DomainType domainType4 = new DomainType();
+        domainType4.setName("outputFormat");
+        List<String> outputList2 = new ArrayList<String>();
+        outputList2.add("text/xml; subtype=gml/3.1.1");
+        domainType4.setValue(outputList2);
+        parameterList2.add(domainType4);
+        operation2.setParameter(parameterList2);
+        
+        
+        //operazione Get Feature
+        Operation operation3 = new Operation();
+        operation3.setName("GetFeature");
+        operationList.add(operation3);
+        List<DCP> dcpList3 = new ArrayList<DCP>();
+        DCP dcp3 = new DCP();
+        HTTP http3 = new HTTP();
+        
+        QName namespace3 = new QName("http://www.w3.org/1999/xlink","GET");
+        
+        RequestMethodType d = new RequestMethodType();
+        d.setTitle("GET");
+        d.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
+        JAXBElement<RequestMethodType> getOrPost3 = new JAXBElement<RequestMethodType>(namespace3,RequestMethodType.class,null,d);
+        List<JAXBElement<RequestMethodType>> listGetOrSet3 = new ArrayList<JAXBElement<RequestMethodType>>();
+        listGetOrSet3.add(getOrPost3);
+        http3.setGetOrPost(listGetOrSet3);
+        dcp3.setHTTP(http3);
+        //aggiungo i campi dcp alla listDCP
+        dcpList3.add(dcp3);
+        operation3.setDCP(dcpList3);
+        List<DomainType> parameterList3 = new ArrayList<DomainType>();
+        DomainType domainType5 = new DomainType();
+        domainType5.setName("resultType");
+        DomainType domainType6 = new DomainType();
+        domainType6.setName("outputFormat");
+        List<String> outputList3 = new ArrayList<String>();
+        outputList3.add("text/xml; subtype=gml/3.1.1");
+        List<String> outputList4 = new ArrayList<String>();
+        outputList4.add("results");
+        outputList4.add("hits");
+        domainType5.setValue(outputList3);
+        domainType6.setValue(outputList4);
+        parameterList2.add(domainType5);
+        parameterList2.add(domainType6);
+        operation3.setParameter(parameterList3);
+        
+        
         //setto le Operation
         OM.setOperation(operationList);
         
