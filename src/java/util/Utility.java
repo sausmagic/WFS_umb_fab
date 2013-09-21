@@ -388,7 +388,7 @@ public class Utility {
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             //jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://schemas.opengis.net/wfs/1.1.0/wfs.xsd");
             jaxbMarshaller.marshal((WFSCapabilitiesType) classe, file);
-            jaxbMarshaller.marshal((WFSCapabilitiesType) classe, System.out);
+            //jaxbMarshaller.marshal((WFSCapabilitiesType) classe, System.out);
         }
         /**
          * Se l'oggetto classe è del tipo WFSException vuol dire che è avvenuto

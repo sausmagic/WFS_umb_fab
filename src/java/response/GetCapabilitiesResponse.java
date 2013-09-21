@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -61,6 +60,63 @@ public class GetCapabilitiesResponse {
         getCapabilitieResp.setVersion(request.getVersion());
         
         //Definiamo qui il ServiceIdentification
+        createServiceIdentification();
+        //fine definizione campi ServiceIdentification
+        
+        //INIZIO definizione campi SERVICE PROVIDER SECTION
+        createServiceProvider();
+        //FINE - SERVICE PROVIDER SECTION
+        
+        //INIZIO - OPERATION METADATA SECTION
+        createOperationMetadata();
+        //FINE - OPERATION METADATA SECTION
+        
+        
+        
+        
+        //Facciamo una prova
+        try {
+            a = util.createXML(getCapabilitieResp);
+            File file = new File("GetCapabilitiesResponse.xml");
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+           // BufferedReader reader2 = new BufferedReader(new FileReader(a.getFD()));
+            String line = reader.readLine();
+                while(line!=null) {
+                    //System.out.println(line);
+                    
+                    //servlet.getResponse().setContentType("text/html;charset=UTF-8");
+                    servlet.getResponse().setContentType("text/xml;charset=UTF-8");
+                    //PrintWriter out = servlet.getResponse().getWriter();
+                    ServletOutputStream out = servlet.getResponse().getOutputStream();
+                   // servlet.getResponse().sendRedirect(file.getAbsolutePath());
+                    out.println(line);
+                    line = reader.readLine();
+                }
+              
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GetCapabilitiesResponse.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JAXBException ex) {
+            Logger.getLogger(GetCapabilitiesResponse.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GetCapabilitiesResponse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return a;
+    }
+
+    private void init(GetCapabilitiesRequest request, RequestResponse servlet) {
+        this.request = request;
+        this.servlet = servlet;
+        getCapabilitieResp = new WFSCapabilitiesType();
+        util = new Utility();
+        
+    }
+
+    /**
+     * Questo metodo crea il campo Service Identification
+     * Fornisce informazioni sul server.
+     */
+    private void createServiceIdentification() {
         ServiceIdentification serviceIdent = new ServiceIdentification();
         serviceIdent.setTitle("WFS SriLanka");
         serviceIdent.setAbstract("Questo Server WFS fornisce funzionalità sulle feature per il progetto Sri Lanka."
@@ -90,10 +146,9 @@ public class GetCapabilitiesResponse {
         accessConstList.add("none");
         serviceIdent.setAccessConstraints(accessConstList);
         getCapabilitieResp.setServiceIdentification(serviceIdent);
-        
-        //fine definizione campi ServiceIdentification
-        
-        //INIZIO definizione campi SERVICE PROVIDER SECTION
+    }
+
+    private void createServiceProvider() {
         ServiceProvider ServiceProvider = new ServiceProvider();
         ServiceProvider.setProviderName("Umberto");
         OnlineResourceType onlineResurce = new OnlineResourceType();
@@ -146,10 +201,9 @@ public class GetCapabilitiesResponse {
         ServiceProvider.setServiceContact(serviceContact);
         
         getCapabilitieResp.setServiceProvider(ServiceProvider);
-        //FINE - SERVICE PROVIDER SECTION
-        
-        //INIZIO - OPERATION METADATA SECTION
-        
+    }
+
+    private void createOperationMetadata() {
         OperationsMetadata OM = new OperationsMetadata();
         List<Operation> operationList = new ArrayList<Operation>();
         Operation operation1 = new Operation();
@@ -255,6 +309,7 @@ public class GetCapabilitiesResponse {
         List<DomainType> parameterList3 = new ArrayList<DomainType>();
         DomainType domainType5 = new DomainType();
         domainType5.setName("resultType");
+        
         DomainType domainType6 = new DomainType();
         domainType6.setName("outputFormat");
         List<String> outputList3 = new ArrayList<String>();
@@ -264,8 +319,8 @@ public class GetCapabilitiesResponse {
         outputList4.add("hits");
         domainType5.setValue(outputList3);
         domainType6.setValue(outputList4);
-        parameterList2.add(domainType5);
-        parameterList2.add(domainType6);
+        parameterList3.add(domainType5);
+        parameterList3.add(domainType6);
         operation3.setParameter(parameterList3);
         
         
@@ -274,46 +329,6 @@ public class GetCapabilitiesResponse {
         
         
         getCapabilitieResp.setOperationsMetadata(OM);
-        //FINE - OPERATION METADATA SECTION
-        
-        
-        
-        
-          //Facciamo una prova
-        try {
-            a = util.createXML(getCapabilitieResp);
-            File file = new File("GetCapabilitiesResponse.xml");
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line = reader.readLine();
-                while(line!=null) {
-                    //System.out.println(line);
-                    
-                    //servlet.getResponse().setContentType("text/html;charset=UTF-8");
-                    servlet.getResponse().setContentType("text/xml;charset=UTF-8");
-                    //PrintWriter out = servlet.getResponse().getWriter();
-                    ServletOutputStream out = servlet.getResponse().getOutputStream();
-                   // servlet.getResponse().sendRedirect(file.getAbsolutePath());
-                    out.println(line);
-                    line = reader.readLine();
-                }
-              
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(GetCapabilitiesResponse.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JAXBException ex) {
-            Logger.getLogger(GetCapabilitiesResponse.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(GetCapabilitiesResponse.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return a;
-    }
-
-    private void init(GetCapabilitiesRequest request, RequestResponse servlet) {
-        this.request = request;
-        this.servlet = servlet;
-        getCapabilitieResp = new WFSCapabilitiesType();
-        util = new Utility();
-        
     }
     
 }
