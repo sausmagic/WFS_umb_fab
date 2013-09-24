@@ -33,6 +33,10 @@ import net.opengis.ows.v_1_0_0.ResponsiblePartySubsetType;
 import net.opengis.ows.v_1_0_0.ServiceIdentification;
 import net.opengis.ows.v_1_0_0.ServiceProvider;
 import net.opengis.ows.v_1_0_0.TelephoneType;
+import net.opengis.ows.v_1_0_0.WGS84BoundingBoxType;
+import net.opengis.wfs.v_1_1_0.FeatureTypeListType;
+import net.opengis.wfs.v_1_1_0.FeatureTypeType;
+import net.opengis.wfs.v_1_1_0.OutputFormatListType;
 import net.opengis.wfs.v_1_1_0.WFSCapabilitiesType;
 import request.GetCapabilitiesRequest;
 import servlet.RequestResponse;
@@ -362,7 +366,44 @@ public class GetCapabilitiesResponse {
         getCapabilitieResp.setOperationsMetadata(OM);
     }
 
+    /**
+     * Specifichiamo quali sono le feature che il server offre.
+     * 
+     */
     private void createFeatureTypeList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FeatureTypeListType featureTypeList = new FeatureTypeListType();
+        List<FeatureTypeType> listFeatureType = new ArrayList<FeatureTypeType>();
+        FeatureTypeType featureTypeMercato =new FeatureTypeType();
+        featureTypeMercato.setAbstract("Questa feature descrive un Mercato");
+        featureTypeMercato.setDefaultSRS("EPSG:4269");
+        List<KeywordsType> keywords = new ArrayList<KeywordsType>();
+        KeywordsType keywordMercato = new KeywordsType();
+        List<String> keywordList = new ArrayList<String>();
+        keywordList.add("mercato");
+        keywordMercato.setKeyword(keywordList);
+        featureTypeMercato.setKeywords(keywords);
+        QName nameMercato = new QName("http://localhost:8080/WFS_umb_fab/Servlet_wfs","umb","umb");
+        featureTypeMercato.setName(nameMercato);
+        OutputFormatListType listFormatOut = new OutputFormatListType();
+        List<String> outputFormat = new ArrayList<String>();
+        outputFormat.add("text/xml");
+        outputFormat.add("subtype=gml/3.1.1");
+        listFormatOut.setFormat(outputFormat);
+        featureTypeMercato.setOutputFormats(listFormatOut);
+        featureTypeMercato.setTitle("Mercato");
+        List<WGS84BoundingBoxType> listBbox = new ArrayList<WGS84BoundingBoxType>();
+        WGS84BoundingBoxType Bbox = new WGS84BoundingBoxType();
+        List<Double> lowerCorner = new ArrayList<Double>();
+        lowerCorner.add(Double.NaN);
+        Bbox.setLowerCorner(lowerCorner);
+        List<Double> UpperCorner = new ArrayList<Double>();
+        UpperCorner.add(Double.NaN);
+        Bbox.setUpperCorner(UpperCorner);
+        listBbox.add(Bbox);
+        featureTypeMercato.setWGS84BoundingBox(listBbox);
+        listFeatureType.add(featureTypeMercato);
+        featureTypeList.setFeatureType(listFeatureType);
+        getCapabilitieResp.setFeatureTypeList(featureTypeList);
+        
     }
 }
