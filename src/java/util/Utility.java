@@ -61,11 +61,10 @@ public class Utility {
         System.out.println("la richiesta è: " + richiest+ " Mi trovo nel metodo \"requestOperation\" ");
         if (richiest.equalsIgnoreCase("GetCapabilities")) {
             System.out.println("Vado a chiamare la classe GetCapabilitiesRequest");
+            //System.out.println("il contenuto del parametro request nella request della servlet è: "+(request.getRequest()).getParameterValues("request")[0]);
             GetCapabilitiesRequest capabilitiesRequest = new GetCapabilitiesRequest(request);
             System.out.println("Versione accettata= " + capabilitiesRequest.getVersion());
             //xmlResponseGetCapabilitiesRequest = capabilitiesRequest.getResponseGetCapabilitiesRequest();
-
-
         }
         if (richiest.isEmpty()) {
             System.out.println("La request è vuota");
@@ -164,6 +163,7 @@ public class Utility {
              */
             xmlResponseGetCapabilitiesRequest = createXML(e);
             File file = new File("ExceptionReport.xml");
+            //System.out.println(file.getAbsolutePath());
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line = reader.readLine();
             while (line != null) {

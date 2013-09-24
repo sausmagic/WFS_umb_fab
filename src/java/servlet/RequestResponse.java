@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Semplicemente una classe che mi mi permette di richiamarmi i parametri della servlet ovunque
  * @author Umberto
  */
 public class RequestResponse {
