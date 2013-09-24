@@ -58,8 +58,9 @@ public class Utility {
          } else {*/
         richiest = richiesta;
         //}
-        System.out.println("la richiesta è: " + richiest);
+        System.out.println("la richiesta è: " + richiest+ " Mi trovo nel metodo \"requestOperation\" ");
         if (richiest.equalsIgnoreCase("GetCapabilities")) {
+            System.out.println("Vado a chiamare la classe GetCapabilitiesRequest");
             GetCapabilitiesRequest capabilitiesRequest = new GetCapabilitiesRequest(request);
             System.out.println("Versione accettata= " + capabilitiesRequest.getVersion());
             //xmlResponseGetCapabilitiesRequest = capabilitiesRequest.getResponseGetCapabilitiesRequest();
@@ -132,6 +133,7 @@ public class Utility {
         try {
             requestOperation(richiesta, reqResp);
 
+            //mi serve solo per vedere se con il client mi invoca la request
             String risposta = cosavuole(richiesta + "&" + service + "&" + version);
 
             //String risposta = cosavuole(params);
