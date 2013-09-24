@@ -221,14 +221,22 @@ public class GetCapabilitiesResponse {
         DCP dcp1 = new DCP();
         HTTP http1 = new HTTP();
 
-        QName namespace1 = new QName("http://www.w3.org/1999/xlink", "GET");
-
-        RequestMethodType b = new RequestMethodType();
-        b.setTitle("GET");
-        b.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
-        JAXBElement<RequestMethodType> getOrPost = new JAXBElement<RequestMethodType>(namespace1, RequestMethodType.class, null, b);
+        QName namespaceget1 = new QName("http://www.w3.org/1999/xlink", "GET");
+        QName namespacepost1 = new QName("http://www.w3.org/1999/xlink", "POST");
+        RequestMethodType get1 = new RequestMethodType();
+        get1.setTitle("GET");
+        get1.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
+        JAXBElement<RequestMethodType> getOrPostget1 = new JAXBElement<RequestMethodType>(namespaceget1, RequestMethodType.class, null, get1);
+        
+        RequestMethodType post1 = new RequestMethodType();
+        post1.setTitle("POST");
+        post1.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs");
+        JAXBElement<RequestMethodType> getOrPostpost1 = new JAXBElement<RequestMethodType>(namespacepost1, RequestMethodType.class, null, post1);
+       
+        
         List<JAXBElement<RequestMethodType>> listGetOrSet = new ArrayList<JAXBElement<RequestMethodType>>();
-        listGetOrSet.add(getOrPost);
+        listGetOrSet.add(getOrPostget1);
+        listGetOrSet.add(getOrPostpost1);
         http1.setGetOrPost(listGetOrSet);
         dcp1.setHTTP(http1);
         //aggiungo i campi dcp alla listDCP
@@ -270,14 +278,22 @@ public class GetCapabilitiesResponse {
         DCP dcp2 = new DCP();
         HTTP http2 = new HTTP();
 
-        QName namespace2 = new QName("http://www.w3.org/1999/xlink", "GET");
-
-        RequestMethodType c = new RequestMethodType();
-        c.setTitle("GET");
-        c.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
-        JAXBElement<RequestMethodType> getOrPost2 = new JAXBElement<RequestMethodType>(namespace2, RequestMethodType.class, null, c);
+        QName namespaceget2 = new QName("http://www.w3.org/1999/xlink", "GET");
+        RequestMethodType get2 = new RequestMethodType();
+        get2.setTitle("GET");
+        get2.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
+        JAXBElement<RequestMethodType> getOrPostget2 = new JAXBElement<RequestMethodType>(namespaceget2, RequestMethodType.class, null, get2);
+        
+        QName namespacepost2 = new QName("http://www.w3.org/1999/xlink", "POST");
+        RequestMethodType post2 = new RequestMethodType();
+        post2.setTitle("POST");
+        post2.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs");
+        JAXBElement<RequestMethodType> getOrPostpost2 = new JAXBElement<RequestMethodType>(namespacepost2, RequestMethodType.class, null, post2);
+        
+        
         List<JAXBElement<RequestMethodType>> listGetOrSet2 = new ArrayList<JAXBElement<RequestMethodType>>();
-        listGetOrSet2.add(getOrPost2);
+        listGetOrSet2.add(getOrPostget2);
+        listGetOrSet2.add(getOrPostpost2);
         http2.setGetOrPost(listGetOrSet2);
         dcp2.setHTTP(http2);
         //aggiungo i campi dcp alla listDCP
@@ -301,14 +317,21 @@ public class GetCapabilitiesResponse {
         DCP dcp3 = new DCP();
         HTTP http3 = new HTTP();
 
-        QName namespace3 = new QName("http://www.w3.org/1999/xlink", "GET");
-
-        RequestMethodType d = new RequestMethodType();
-        d.setTitle("GET");
-        d.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
-        JAXBElement<RequestMethodType> getOrPost3 = new JAXBElement<RequestMethodType>(namespace3, RequestMethodType.class, null, d);
+        QName namespaceget3 = new QName("http://www.w3.org/1999/xlink", "GET");
+        RequestMethodType get3 = new RequestMethodType();
+        get3.setTitle("GET");
+        get3.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
+        JAXBElement<RequestMethodType> getOrPostget3 = new JAXBElement<RequestMethodType>(namespaceget3, RequestMethodType.class, null, get3);
+        
+        QName namespacepost3 = new QName("http://www.w3.org/1999/xlink", "GET");
+        RequestMethodType post3 = new RequestMethodType();
+        post3.setTitle("POST");
+        post3.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs");
+        JAXBElement<RequestMethodType> getOrPostpost3 = new JAXBElement<RequestMethodType>(namespacepost3, RequestMethodType.class, null, post3);
+        
         List<JAXBElement<RequestMethodType>> listGetOrSet3 = new ArrayList<JAXBElement<RequestMethodType>>();
-        listGetOrSet3.add(getOrPost3);
+        listGetOrSet3.add(getOrPostget3);
+        listGetOrSet3.add(getOrPostpost3);
         http3.setGetOrPost(listGetOrSet3);
         dcp3.setHTTP(http3);
         //aggiungo i campi dcp alla listDCP
