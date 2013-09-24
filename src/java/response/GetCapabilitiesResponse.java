@@ -49,50 +49,50 @@ public class GetCapabilitiesResponse {
     RequestResponse servlet;
     Utility util;
     FileOutputStream a;
-    
+
     public GetCapabilitiesResponse(GetCapabilitiesRequest request, RequestResponse servlet) {
         //inizializziamo gli oggetti della classe
-        init(request,servlet);
-        
-        }
-    
-    public FileOutputStream getCapabilitiesResponseXML(){
+        init(request, servlet);
+
+    }
+
+    public FileOutputStream getCapabilitiesResponseXML() {
         getCapabilitieResp.setVersion(request.getVersion());
-        
+
         //Definiamo qui il ServiceIdentification
         createServiceIdentification();
         //fine definizione campi ServiceIdentification
-        
+
         //INIZIO definizione campi SERVICE PROVIDER SECTION
         createServiceProvider();
         //FINE - SERVICE PROVIDER SECTION
-        
+
         //INIZIO - OPERATION METADATA SECTION
         createOperationMetadata();
         //FINE - OPERATION METADATA SECTION
-        
-        
-        
-        
+
+
+
+
         //Facciamo una prova
         try {
             a = util.createXML(getCapabilitieResp);
             File file = new File("GetCapabilitiesResponse.xml");
             BufferedReader reader = new BufferedReader(new FileReader(file));
-           // BufferedReader reader2 = new BufferedReader(new FileReader(a.getFD()));
+            // BufferedReader reader2 = new BufferedReader(new FileReader(a.getFD()));
             String line = reader.readLine();
-                while(line!=null) {
-                    //System.out.println(line);
-                    
-                    //servlet.getResponse().setContentType("text/html;charset=UTF-8");
-                    servlet.getResponse().setContentType("text/xml;charset=UTF-8");
-                    //PrintWriter out = servlet.getResponse().getWriter();
-                    ServletOutputStream out = servlet.getResponse().getOutputStream();
-                   // servlet.getResponse().sendRedirect(file.getAbsolutePath());
-                    out.println(line);
-                    line = reader.readLine();
-                }
-              
+            while (line != null) {
+                //System.out.println(line);
+
+                //servlet.getResponse().setContentType("text/html;charset=UTF-8");
+                servlet.getResponse().setContentType("text/xml;charset=UTF-8");
+                //PrintWriter out = servlet.getResponse().getWriter();
+                ServletOutputStream out = servlet.getResponse().getOutputStream();
+                // servlet.getResponse().sendRedirect(file.getAbsolutePath());
+                out.println(line);
+                line = reader.readLine();
+            }
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GetCapabilitiesResponse.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JAXBException ex) {
@@ -100,7 +100,7 @@ public class GetCapabilitiesResponse {
         } catch (IOException ex) {
             Logger.getLogger(GetCapabilitiesResponse.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return a;
     }
 
@@ -109,12 +109,12 @@ public class GetCapabilitiesResponse {
         this.servlet = servlet;
         getCapabilitieResp = new WFSCapabilitiesType();
         util = new Utility();
-        
+
     }
 
     /**
-     * Questo metodo crea il campo Service Identification
-     * Fornisce informazioni sul server.
+     * Questo metodo crea il campo Service Identification Fornisce informazioni
+     * sul server.
      */
     private void createServiceIdentification() {
         ServiceIdentification serviceIdent = new ServiceIdentification();
@@ -127,7 +127,7 @@ public class GetCapabilitiesResponse {
         List<String> typeListVers = new ArrayList<String>();
         typeListVers.add(request.getVersion());
         serviceIdent.setServiceTypeVersion(typeListVers);
-        
+
         //creaimo il tag Keywords con i relativi figli
         List<KeywordsType> keyList = new ArrayList<KeywordsType>();
         KeywordsType k1 = new KeywordsType();
@@ -140,7 +140,7 @@ public class GetCapabilitiesResponse {
         k1.setType(codeType2);
         k1.setKeyword(keyvalue);
         serviceIdent.setKeywords(keyList);
-        
+
         serviceIdent.setFees("none");
         List<String> accessConstList = new ArrayList<String>();
         accessConstList.add("none");
@@ -148,24 +148,28 @@ public class GetCapabilitiesResponse {
         getCapabilitieResp.setServiceIdentification(serviceIdent);
     }
 
+    /**
+     * Crea la sezione Service Provider del file xml di risposta alla
+     * GetCapabilitiesRequest
+     */
     private void createServiceProvider() {
         ServiceProvider ServiceProvider = new ServiceProvider();
         ServiceProvider.setProviderName("Umberto");
         OnlineResourceType onlineResurce = new OnlineResourceType();
-        
+
         //nota il campo href è provvisorio andrà modificato
         onlineResurce.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs");
-        
+
         ServiceProvider.setProviderSite(onlineResurce);
         ResponsiblePartySubsetType serviceContact = new ResponsiblePartySubsetType();
         serviceContact.setIndividualName("Umberto Palo");
         serviceContact.setPositionName("Student - Unisa university");
-       
-        
-        
+
+
+
         //inizio - Settiamo info sul contatto
         ContactType contactType = new ContactType();
-        
+
         TelephoneType phone = new TelephoneType();
         List<String> voices = new ArrayList<String>();
         voices.add("33895467709 - cellular Umberto ");
@@ -174,7 +178,7 @@ public class GetCapabilitiesResponse {
         facSimile.add("33895467709 - cellular Umberto");
         phone.setFacsimile(facSimile);
         contactType.setPhone(phone);
-        
+
         //Settiamo l'indirizzo
         AddressType address = new AddressType();
         address.setAdministrativeArea("zona rurale");
@@ -193,16 +197,20 @@ public class GetCapabilitiesResponse {
         contactType.setContactInstructions("contattare in caso di emergenza");
         serviceContact.setContactInfo(contactType);
         //fine info su contatto
-        
+
         //settimo il Role
         CodeType codeType3 = new CodeType();
         codeType3.setValue("none");
         serviceContact.setRole(codeType3);
         ServiceProvider.setServiceContact(serviceContact);
-        
+
         getCapabilitieResp.setServiceProvider(ServiceProvider);
     }
 
+    /**
+     * Crea la sezione Operation Metadata del file xml di risposta alla
+     * GetCapabilitiesRequest
+     */
     private void createOperationMetadata() {
         OperationsMetadata OM = new OperationsMetadata();
         List<Operation> operationList = new ArrayList<Operation>();
@@ -212,13 +220,13 @@ public class GetCapabilitiesResponse {
         List<DCP> dcpList = new ArrayList<DCP>();
         DCP dcp1 = new DCP();
         HTTP http1 = new HTTP();
-        
-        QName namespace1 = new QName("http://www.w3.org/1999/xlink","GET");
-        
+
+        QName namespace1 = new QName("http://www.w3.org/1999/xlink", "GET");
+
         RequestMethodType b = new RequestMethodType();
         b.setTitle("GET");
         b.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
-        JAXBElement<RequestMethodType> getOrPost = new JAXBElement<RequestMethodType>(namespace1,RequestMethodType.class,null,b);
+        JAXBElement<RequestMethodType> getOrPost = new JAXBElement<RequestMethodType>(namespace1, RequestMethodType.class, null, b);
         List<JAXBElement<RequestMethodType>> listGetOrSet = new ArrayList<JAXBElement<RequestMethodType>>();
         listGetOrSet.add(getOrPost);
         http1.setGetOrPost(listGetOrSet);
@@ -253,7 +261,7 @@ public class GetCapabilitiesResponse {
         domainType3.setValue(sectionList);
         parameterList.add(domainType3);
         operation1.setParameter(parameterList);
-        
+
         //operazione describe feature type
         Operation operation2 = new Operation();
         operation2.setName("DescribeFeatureType");
@@ -261,13 +269,13 @@ public class GetCapabilitiesResponse {
         List<DCP> dcpList2 = new ArrayList<DCP>();
         DCP dcp2 = new DCP();
         HTTP http2 = new HTTP();
-        
-        QName namespace2 = new QName("http://www.w3.org/1999/xlink","GET");
-        
+
+        QName namespace2 = new QName("http://www.w3.org/1999/xlink", "GET");
+
         RequestMethodType c = new RequestMethodType();
         c.setTitle("GET");
         c.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
-        JAXBElement<RequestMethodType> getOrPost2 = new JAXBElement<RequestMethodType>(namespace2,RequestMethodType.class,null,c);
+        JAXBElement<RequestMethodType> getOrPost2 = new JAXBElement<RequestMethodType>(namespace2, RequestMethodType.class, null, c);
         List<JAXBElement<RequestMethodType>> listGetOrSet2 = new ArrayList<JAXBElement<RequestMethodType>>();
         listGetOrSet2.add(getOrPost2);
         http2.setGetOrPost(listGetOrSet2);
@@ -283,8 +291,8 @@ public class GetCapabilitiesResponse {
         domainType4.setValue(outputList2);
         parameterList2.add(domainType4);
         operation2.setParameter(parameterList2);
-        
-        
+
+
         //operazione Get Feature
         Operation operation3 = new Operation();
         operation3.setName("GetFeature");
@@ -292,13 +300,13 @@ public class GetCapabilitiesResponse {
         List<DCP> dcpList3 = new ArrayList<DCP>();
         DCP dcp3 = new DCP();
         HTTP http3 = new HTTP();
-        
-        QName namespace3 = new QName("http://www.w3.org/1999/xlink","GET");
-        
+
+        QName namespace3 = new QName("http://www.w3.org/1999/xlink", "GET");
+
         RequestMethodType d = new RequestMethodType();
         d.setTitle("GET");
         d.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
-        JAXBElement<RequestMethodType> getOrPost3 = new JAXBElement<RequestMethodType>(namespace3,RequestMethodType.class,null,d);
+        JAXBElement<RequestMethodType> getOrPost3 = new JAXBElement<RequestMethodType>(namespace3, RequestMethodType.class, null, d);
         List<JAXBElement<RequestMethodType>> listGetOrSet3 = new ArrayList<JAXBElement<RequestMethodType>>();
         listGetOrSet3.add(getOrPost3);
         http3.setGetOrPost(listGetOrSet3);
@@ -309,7 +317,7 @@ public class GetCapabilitiesResponse {
         List<DomainType> parameterList3 = new ArrayList<DomainType>();
         DomainType domainType5 = new DomainType();
         domainType5.setName("resultType");
-        
+
         DomainType domainType6 = new DomainType();
         domainType6.setName("outputFormat");
         List<String> outputList3 = new ArrayList<String>();
@@ -322,13 +330,10 @@ public class GetCapabilitiesResponse {
         parameterList3.add(domainType5);
         parameterList3.add(domainType6);
         operation3.setParameter(parameterList3);
-        
-        
+
+
         //setto le Operation
         OM.setOperation(operationList);
-        
-        
         getCapabilitieResp.setOperationsMetadata(OM);
     }
-    
 }

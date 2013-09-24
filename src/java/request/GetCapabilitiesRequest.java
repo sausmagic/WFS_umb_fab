@@ -63,8 +63,8 @@ public class GetCapabilitiesRequest {
             if(!acceptedVer)
                 throw new WFSException(request,"Errore versione non supportata dal server", null, "UnsupportedVersionFromServer");
         }else{
-            this.setVersion(NegotiateVersion.getSupportedVersion());
-            System.out.println("Ho settato la versione supportata dal server in quanto non specificata dal client. Versione supportata " + NegotiateVersion.getSupportedVersion());
+            this.setVersion(NegotiateVersion.getVersion11());
+            System.out.println("Ho settato la versione (più alta) supportata dal server in quanto non specificata dal client. Versione supportata più alta " + NegotiateVersion.getVersion20());
         }
         
         /**
