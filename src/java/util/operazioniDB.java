@@ -39,18 +39,18 @@ public class operazioniDB implements connessionePostgresql {
                     "postgres", "sausmagic");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(operazioniDB.class.getName()).log(Level.SEVERE, null, ex);
-            Logger.getLogger(operazioniDB.class.getName()).log(Level.ALL, "Connessione avvenuta con successo");
-            System.err.println("Connessione....ok");
+            Logger.getLogger(operazioniDB.class.getName()).log(Level.ALL, "Connessione  non avvenuta");
+            System.err.println("Connessione  non avvenuta");
 
         } catch (SQLException ex) {
             Logger.getLogger(operazioniDB.class.getName()).log(Level.SEVERE, null, ex);
-            Logger.getLogger(operazioniDB.class.getName()).log(Level.ALL, "Connessione avvenuta con successo");
-            System.err.println("Connessione....ok");
+            Logger.getLogger(operazioniDB.class.getName()).log(Level.ALL, "Connessione  non avvenuta");
+            System.err.println("Connessione  non avvenuta");
 
         }
 
-        Logger.getLogger(operazioniDB.class.getName()).log(Level.ALL, "Connessione avvenuta con successo");
-        System.err.println("Connessione....ok");
+        Logger.getLogger(operazioniDB.class.getName()).log(Level.ALL, "Connessione  avvenuta");
+        System.err.println("Connessione avvenuta");
         return connection;
     }
 
