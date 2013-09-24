@@ -71,7 +71,9 @@ public class GetCapabilitiesResponse {
         createOperationMetadata();
         //FINE - OPERATION METADATA SECTION
 
-
+        //INIZIO -  FEATURE TYPE LIST SECTION
+        createFeatureTypeList();
+        //FINE -  FEATURE TYPE LIST SECTION
 
 
         //Facciamo una prova
@@ -358,5 +360,9 @@ public class GetCapabilitiesResponse {
         //setto le Operation
         OM.setOperation(operationList);
         getCapabilitieResp.setOperationsMetadata(OM);
+    }
+
+    private void createFeatureTypeList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
