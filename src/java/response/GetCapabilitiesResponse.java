@@ -348,8 +348,8 @@ public class GetCapabilitiesResponse {
         List<String> outputList4 = new ArrayList<String>();
         outputList4.add("results");
         outputList4.add("hits");
-        domainType5.setValue(outputList3);
-        domainType6.setValue(outputList4);
+        domainType6.setValue(outputList3);
+        domainType5.setValue(outputList4);
         parameterList3.add(domainType5);
         parameterList3.add(domainType6);
         operation3.setParameter(parameterList3);
