@@ -100,10 +100,12 @@ public class Utility {
         Iterator i = params.keySet().iterator();
         while (i.hasNext()) {
             String key = (String) i.next();
+            
             String value = ((String[]) params.get(key))[0];
             if (key.equalsIgnoreCase("request")) {
                 richiesta = value;
             }
+            
             if (key.equalsIgnoreCase("service")) {
                 service = value;
             }

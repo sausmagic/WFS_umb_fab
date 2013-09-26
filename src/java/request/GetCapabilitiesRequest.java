@@ -45,19 +45,19 @@ public class GetCapabilitiesRequest {
         //analizzo i parametri
         System.out.println("I parametri di richiesta contiene qualcosa: "+parametriRichiesta.isEmpty());
         
-        if (parametriRichiesta.get("request")== null || parametriRichiesta.get("service")== null)
+        if (parametriRichiesta.get("REQUEST")== null || parametriRichiesta.get("SERVICE")== null)
              throw new WFSException(request,"Errore non sono stati definiti uno o più dei parametri mandatory", null, "MissingParameterValue");
         //ObjectFactory exception = new ObjectFactory();
         //ExceptionReport exRep = exception.createExceptionReport();
         //ExceptionType exType = exception.createExceptionType();
        
-        System.out.println("il parametro request è: "+parametriRichiesta.get("request")[0]);
-        System.out.println("il parametro service è: "+parametriRichiesta.get("service")[0]);
-        this.setRequest(parametriRichiesta.get("request")[0]);
-        this.setService(parametriRichiesta.get("service")[0]);
+        System.out.println("il parametro request è: "+parametriRichiesta.get("REQUEST")[0]);
+        System.out.println("il parametro service è: "+parametriRichiesta.get("SERVICE")[0]);
+        this.setRequest(parametriRichiesta.get("REQUEST")[0]);
+        this.setService(parametriRichiesta.get("SERVICE")[0]);
         
-        if(parametriRichiesta.containsKey("version")){
-            this.setVersion(parametriRichiesta.get("version")[0]);
+        if(parametriRichiesta.containsKey("VERSION")){
+            this.setVersion(parametriRichiesta.get("VERSION")[0]);
             boolean acceptedVer = NegotiateVersion.acceptedVersion(this.getVersion());
             System.out.println("La versione "+this.getVersion()+" è accettata dal server?: "+acceptedVer);
             if(!acceptedVer)
