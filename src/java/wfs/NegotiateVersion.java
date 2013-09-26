@@ -34,6 +34,9 @@ public class NegotiateVersion {
         } else if (version.equalsIgnoreCase(VS_20)) {
             return true;
         }
+        else if (version.equalsIgnoreCase(VS_10)) {
+            return true;
+        }
         return false;
     }
 
