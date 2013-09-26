@@ -77,7 +77,8 @@ public class WFSException extends ExceptionClass{
             }else if(parametriRichiesta.get("service")== null){
                 code = ExceptionClass.MISSING_PARAMETER_VALUE;
                 locator="service";
-            }else if(parametriRichiesta.get("version")[0] != "1.1.0"){
+            }
+            else if(parametriRichiesta.get("version")[0] != "1.1.0" || parametriRichiesta.get("version")[0] != "1.0.0"){
                 code = "UnsupportedVersionFromServer";
                 locator="version";
             }

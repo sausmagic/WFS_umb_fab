@@ -7,6 +7,7 @@ package request;
 import exception.WFSException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import net.opengis.ows.v_1_0_0.ExceptionReport;
@@ -43,20 +44,64 @@ public class GetCapabilitiesRequest {
         parametriRichiesta = request.getRequest().getParameterMap();
         
         //analizzo i parametri
+        Iterator<String> j = parametriRichiesta.keySet().iterator();
+        while (j.hasNext()) {
+            String key = j.next();
+            
+            String value = parametriRichiesta.get(key)[0];
+            if (key.equalsIgnoreCase("request")) {
+                this.request = value;
+            }
+            
+            if (key.equalsIgnoreCase("service")) {
+                service = value;
+            }
+            if (key.equalsIgnoreCase("version")) {
+                version = value;
+            }
+            if (key.equalsIgnoreCase("section")) {
+                continue;
+            }
+            if (key.equalsIgnoreCase("updatesequence")) {
+                continue;
+            }
+            if (key.equalsIgnoreCase("acceptfotmats")) {
+                continue;
+            }
+            if (key.equalsIgnoreCase("acceptlanguages")) {
+                continue;
+            }
+        }
         System.out.println("I parametri di richiesta contiene qualcosa: "+parametriRichiesta.isEmpty());
         
-        if (parametriRichiesta.get("REQUEST")== null || parametriRichiesta.get("SERVICE")== null)
-             throw new WFSException(request,"Errore non sono stati definiti uno o più dei parametri mandatory", null, "MissingParameterValue");
+        if(this.request.isEmpty() || service.isEmpty())
+            throw new WFSException(request,"Errore non sono stati definiti uno o più dei parametri mandatory", null, "MissingParameterValue");
+        //if (parametriRichiesta.get("REQUEST")== null || parametriRichiesta.get("SERVICE")== null)
+          //   throw new WFSException(request,"Errore non sono stati definiti uno o più dei parametri mandatory", null, "MissingParameterValue");
         //ObjectFactory exception = new ObjectFactory();
         //ExceptionReport exRep = exception.createExceptionReport();
         //ExceptionType exType = exception.createExceptionType();
-       
-        System.out.println("il parametro request è: "+parametriRichiesta.get("REQUEST")[0]);
-        System.out.println("il parametro service è: "+parametriRichiesta.get("SERVICE")[0]);
-        this.setRequest(parametriRichiesta.get("REQUEST")[0]);
-        this.setService(parametriRichiesta.get("SERVICE")[0]);
+        this.setRequest(this.request);
+        this.setService(service);
+        System.out.println("il parametro request è: "+this.getRequest());
+        System.out.println("il parametro service è: "+this.getService());
+        //this.setRequest(parametriRichiesta.get("REQUEST")[0]);
+        //this.setService(parametriRichiesta.get("SERVICE")[0]);
         
-        if(parametriRichiesta.containsKey("VERSION")){
+        version = version.trim();
+        System.out.println("La lunghezza di version è: "+version.length());
+        if(!version.isEmpty()){
+            this.setVersion(version);
+            boolean acceptedVer = NegotiateVersion.acceptedVersion(this.getVersion());
+            System.out.println("La versione "+this.getVersion()+" è accettata dal server?: "+acceptedVer);
+            if(!acceptedVer)
+                throw new WFSException(request,"Errore versione non supportata dal server", null, "UnsupportedVersionFromServer");
+        }else{
+            this.setVersion(NegotiateVersion.getVersion11());
+            System.out.println("Ho settato la versione (più alta) supportata dal server in quanto non specificata dal client. Versione supportata più alta " + NegotiateVersion.getVersion11());
+        }
+        
+       /** if(parametriRichiesta.containsKey("VERSION")){
             this.setVersion(parametriRichiesta.get("VERSION")[0]);
             boolean acceptedVer = NegotiateVersion.acceptedVersion(this.getVersion());
             System.out.println("La versione "+this.getVersion()+" è accettata dal server?: "+acceptedVer);
@@ -66,6 +111,7 @@ public class GetCapabilitiesRequest {
             this.setVersion(NegotiateVersion.getVersion11());
             System.out.println("Ho settato la versione (più alta) supportata dal server in quanto non specificata dal client. Versione supportata più alta " + NegotiateVersion.getVersion20());
         }
+        **/
         
         /**
          * Controlliamo se è stato specificato il parametro Section e quali sezioni il client ha richiesto
