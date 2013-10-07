@@ -60,9 +60,13 @@ public class GetCapabilitiesResponse {
 
     }
 
+    /**
+     * Metodo che restituisce ul file xml contenente la risposta ad una getCapabilities
+     * @return il file xml 
+     */
     public FileOutputStream getCapabilitiesResponseXML() {
         getCapabilitieResp.setVersion(request.getVersion());
-
+        
         //Definiamo qui il ServiceIdentification
         createServiceIdentification();
         //fine definizione campi ServiceIdentification
@@ -124,6 +128,7 @@ public class GetCapabilitiesResponse {
      */
     private void createServiceIdentification() {
         ServiceIdentification serviceIdent = new ServiceIdentification();
+        
         serviceIdent.setTitle("WFS SriLanka");
         serviceIdent.setAbstract("Questo Server WFS fornisce funzionalità sulle feature per il progetto Sri Lanka."
                 + "Le feature afferte riguardano le fattorie, i mercati, le città ed altro. Contact Umberto");
