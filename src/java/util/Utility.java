@@ -384,15 +384,17 @@ public class Utility {
 
         FileOutputStream file = null;
         if (classe instanceof WFSCapabilitiesType) {
-            //file = new FileOutputStream("C:\\Users\\Umberto\\GetCapabilitiesResponse.xml");
-            file = new FileOutputStream("GetCapabilitiesResponse.xml");
-            JAXBContext context = JAXBContext.newInstance("net.opengis.wfs.v_1_1_0");
-            Marshaller jaxbMarshaller = context.createMarshaller();
-            // output pretty printed
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            //jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://schemas.opengis.net/wfs/1.1.0/wfs.xsd");
-            jaxbMarshaller.marshal((WFSCapabilitiesType) classe, file);
-            //jaxbMarshaller.marshal((WFSCapabilitiesType) classe, System.out);
+            
+                //file = new FileOutputStream("C:\\Users\\Umberto\\GetCapabilitiesResponse.xml");
+                file = new FileOutputStream("GetCapabilitiesResponse.xml");
+                JAXBContext context = JAXBContext.newInstance("net.opengis.wfs.v_1_1_0");
+                Marshaller jaxbMarshaller = context.createMarshaller();
+                // output pretty printed
+                jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+                
+                jaxbMarshaller.marshal((WFSCapabilitiesType) classe, file);
+                //jaxbMarshaller.marshal((WFSCapabilitiesType) classe, System.out);
+            
         }
         /**
          * Se l'oggetto classe è del tipo WFSException vuol dire che è avvenuto
