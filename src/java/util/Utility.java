@@ -15,19 +15,27 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import net.opengis.ows.v_1_0_0.ExceptionReport;
 import net.opengis.ows.v_1_0_0.ExceptionType;
 import net.opengis.wfs.v_1_1_0.WFSCapabilitiesType;
+import org.xml.sax.SAXException;
 import request.GetCapabilitiesRequest;
 import servlet.RequestResponse;
 
@@ -384,16 +392,29 @@ public class Utility {
 
         FileOutputStream file = null;
         if (classe instanceof WFSCapabilitiesType) {
-            
+            //try {            
                 //file = new FileOutputStream("C:\\Users\\Umberto\\GetCapabilitiesResponse.xml");
                 file = new FileOutputStream("GetCapabilitiesResponse.xml");
                 JAXBContext context = JAXBContext.newInstance("net.opengis.wfs.v_1_1_0");
                 Marshaller jaxbMarshaller = context.createMarshaller();
                 // output pretty printed
                 jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-                
+               // SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.DEFAULT_NS_PREFIX);
+                //Schema schema = sf.newSchema(new URL("http://schemas.opengis.net/wfs/1.1.0/wfs.xsd"));
+               // jaxbMarshaller.setSchema(schema);
+               /* if(schema==null){
+                    System.out.println("LO SCHEMA è VUOTO");
+                }
+                else{
+                    System.out.println(" Lo SCHEMA é"+schema.toString());
+                }*/
                 jaxbMarshaller.marshal((WFSCapabilitiesType) classe, file);
-                //jaxbMarshaller.marshal((WFSCapabilitiesType) classe, System.out);
+          //  } catch (SAXException ex) {
+            //    Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
+            //} catch (MalformedURLException ex) {
+             //   Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
+            //}
+                
             
         }
         /**
