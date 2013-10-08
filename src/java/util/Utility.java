@@ -384,6 +384,13 @@ public class Utility {
      * Metodo di supporto che prende un oggetto e controlla con istanceof che
      * tipo di oggetto è, successivamente procede a fare il murshalling dei dati
      * utilizzando JAXB.
+     * 
+     * Nota: sul sito del progetto indicato da OGC, dove riporta il 
+     * riferimento al progetto jaxb-java per schemi OGC nel loro 
+     * tutorial non eseguono la validazione del documento.
+     * Io (Umberto Palo) ho provato a fare la validazione (rimango le chiamate alla validazione commentate)
+     * ma ottengo sempre errori strani non sapendo cosa specificare in SchemaFactory
+     * Non essendo W3C e OGC operanti sugli stessi standard.
      *
      * @param classe
      * @return

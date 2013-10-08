@@ -12,7 +12,6 @@
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.opengis.net/wfs", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED, location = "http://schemas.opengis.net/wfs/1.1.0/wfs.xsd", xmlns = { 
         @javax.xml.bind.annotation.XmlNs(prefix = "wfs", 
                    namespaceURI="http://www.opengis.net/wfs"),
-
         @javax.xml.bind.annotation.XmlNs(prefix="ogc",
                    namespaceURI="http://www.opengis.net/ogc"),
         @javax.xml.bind.annotation.XmlNs(prefix="xlink",
