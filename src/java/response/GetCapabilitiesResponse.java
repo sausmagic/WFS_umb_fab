@@ -82,6 +82,8 @@ public class GetCapabilitiesResponse {
         //INIZIO -  FEATURE TYPE LIST SECTION
         createFeatureTypeList();
         //FINE -  FEATURE TYPE LIST SECTION
+        
+        createServesGMLObjectTypeList();
 
 
         //Facciamo una prova
@@ -231,16 +233,18 @@ public class GetCapabilitiesResponse {
         List<DCP> dcpList = new ArrayList<DCP>();
         DCP dcp1 = new DCP();
         HTTP http1 = new HTTP();
-        QName namespaceget1 = new QName("http://www.w3.org/1999/xlink", "GET");
-        QName namespacepost1 = new QName("http://www.w3.org/1999/xlink", "POST");
+        //QName namespaceget1 = new QName("http://www.w3.org/1999/xlink", "GET");
+        QName namespaceget1 = new QName("http://www.opengis.net/ows", "Get");
+        //QName namespacepost1 = new QName("http://www.w3.org/1999/xlink", "POST");
+        QName namespacepost1 = new QName("http://www.opengis.net/ows","Post");
         RequestMethodType get1 = new RequestMethodType();
-        get1.setTitle("GET");
+        get1.setTitle("Get");
         get1.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
-        JAXBElement<RequestMethodType> getOrPostget1 = new JAXBElement<RequestMethodType>(namespaceget1, RequestMethodType.class, null, get1);
+        JAXBElement<RequestMethodType> getOrPostget1 = new JAXBElement<RequestMethodType>(namespaceget1, RequestMethodType.class, get1);
         RequestMethodType post1 = new RequestMethodType();
-        post1.setTitle("POST");
+        post1.setTitle("Post");
         post1.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs");
-        JAXBElement<RequestMethodType> getOrPostpost1 = new JAXBElement<RequestMethodType>(namespacepost1, RequestMethodType.class, null, post1);
+        JAXBElement<RequestMethodType> getOrPostpost1 = new JAXBElement<RequestMethodType>(namespacepost1, RequestMethodType.class, post1);
         List<JAXBElement<RequestMethodType>> listGetOrSet = new ArrayList<JAXBElement<RequestMethodType>>();
         listGetOrSet.add(getOrPostget1);
         listGetOrSet.add(getOrPostpost1);
@@ -283,16 +287,18 @@ public class GetCapabilitiesResponse {
         List<DCP> dcpList2 = new ArrayList<DCP>();
         DCP dcp2 = new DCP();
         HTTP http2 = new HTTP();
-        QName namespaceget2 = new QName("http://www.w3.org/1999/xlink", "GET");
+        //QName namespaceget2 = new QName("http://www.w3.org/1999/xlink", "GET");
+        QName namespaceget2 = new QName("http://www.opengis.net/ows", "Get");
         RequestMethodType get2 = new RequestMethodType();
-        get2.setTitle("GET");
+        get2.setTitle("Get");
         get2.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
-        JAXBElement<RequestMethodType> getOrPostget2 = new JAXBElement<RequestMethodType>(namespaceget2, RequestMethodType.class, null, get2);       
-        QName namespacepost2 = new QName("http://www.w3.org/1999/xlink", "POST");
+        JAXBElement<RequestMethodType> getOrPostget2 = new JAXBElement<RequestMethodType>(namespaceget2, RequestMethodType.class, get2);       
+        //QName namespacepost2 = new QName("http://www.w3.org/1999/xlink", "POST");
+        QName namespacepost2 = new QName("http://www.opengis.net/ows", "Post");
         RequestMethodType post2 = new RequestMethodType();
-        post2.setTitle("POST");
+        post2.setTitle("Post");
         post2.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs");
-        JAXBElement<RequestMethodType> getOrPostpost2 = new JAXBElement<RequestMethodType>(namespacepost2, RequestMethodType.class, null, post2);
+        JAXBElement<RequestMethodType> getOrPostpost2 = new JAXBElement<RequestMethodType>(namespacepost2, RequestMethodType.class, post2);
         List<JAXBElement<RequestMethodType>> listGetOrSet2 = new ArrayList<JAXBElement<RequestMethodType>>();
         listGetOrSet2.add(getOrPostget2);
         listGetOrSet2.add(getOrPostpost2);
@@ -316,16 +322,19 @@ public class GetCapabilitiesResponse {
         List<DCP> dcpList3 = new ArrayList<DCP>();
         DCP dcp3 = new DCP();
         HTTP http3 = new HTTP();
-        QName namespaceget3 = new QName("http://www.w3.org/1999/xlink", "GET");
+        //QName namespaceget3 = new QName("http://www.w3.org/1999/xlink", "GET");
+        QName namespaceget3 = new QName("http://www.opengis.net/ows","Get");
         RequestMethodType get3 = new RequestMethodType();
-        get3.setTitle("GET");
+        //get3.setType("Get");
+        get3.setTitle("Get");
         get3.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs?");
-        JAXBElement<RequestMethodType> getOrPostget3 = new JAXBElement<RequestMethodType>(namespaceget3, RequestMethodType.class, null, get3);
-        QName namespacepost3 = new QName("http://www.w3.org/1999/xlink", "GET");
+        JAXBElement<RequestMethodType> getOrPostget3 = new JAXBElement<RequestMethodType>(namespaceget3, RequestMethodType.class, get3);
+        //QName namespacepost3 = new QName("http://www.w3.org/1999/xlink", "GET");
+        QName namespacepost3 = new QName("http://www.opengis.net/ows","Post");
         RequestMethodType post3 = new RequestMethodType();
-        post3.setTitle("POST");
+        post3.setTitle("Post");
         post3.setHref("http://localhost:8080/WFS_umb_fab/Servlet_wfs");
-        JAXBElement<RequestMethodType> getOrPostpost3 = new JAXBElement<RequestMethodType>(namespacepost3, RequestMethodType.class, null, post3);
+        JAXBElement<RequestMethodType> getOrPostpost3 = new JAXBElement<RequestMethodType>(namespacepost3, RequestMethodType.class, post3);
         List<JAXBElement<RequestMethodType>> listGetOrSet3 = new ArrayList<JAXBElement<RequestMethodType>>();
         listGetOrSet3.add(getOrPostget3);
         listGetOrSet3.add(getOrPostpost3);
@@ -382,16 +391,26 @@ public class GetCapabilitiesResponse {
         List<WGS84BoundingBoxType> listBbox = new ArrayList<WGS84BoundingBoxType>();
         WGS84BoundingBoxType Bbox = new WGS84BoundingBoxType();
         List<Double> lowerCorner = new ArrayList<Double>();
-        lowerCorner.add(Double.NaN);
+        lowerCorner.add(new Double("-180"));
+        lowerCorner.add(new Double("90"));
         Bbox.setLowerCorner(lowerCorner);
         List<Double> UpperCorner = new ArrayList<Double>();
-        UpperCorner.add(Double.NaN);
+        UpperCorner.add(new Double("180"));
+        UpperCorner.add(new Double("-90"));
         Bbox.setUpperCorner(UpperCorner);
         listBbox.add(Bbox);
         featureTypeMercato.setWGS84BoundingBox(listBbox);
         listFeatureType.add(featureTypeMercato);
         featureTypeList.setFeatureType(listFeatureType);
         getCapabilitieResp.setFeatureTypeList(featureTypeList);
+        
+    }
+
+    /**
+     * nel pacchetto WFS 1.1.0 manca la classe ServesGMLObjectTypeList
+     * vedi nota nel metodo createXML nella classe utility.java grazie 
+     */
+    private void createServesGMLObjectTypeList() {
         
     }
 }

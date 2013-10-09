@@ -399,28 +399,32 @@ public class Utility {
 
         FileOutputStream file = null;
         if (classe instanceof WFSCapabilitiesType) {
-            //try {            
+                      
                 //file = new FileOutputStream("C:\\Users\\Umberto\\GetCapabilitiesResponse.xml");
                 file = new FileOutputStream("GetCapabilitiesResponse.xml");
                 JAXBContext context = JAXBContext.newInstance("net.opengis.wfs.v_1_1_0");
                 Marshaller jaxbMarshaller = context.createMarshaller();
                 // output pretty printed
                 jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-               // SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.DEFAULT_NS_PREFIX);
-                //Schema schema = sf.newSchema(new URL("http://schemas.opengis.net/wfs/1.1.0/wfs.xsd"));
-               // jaxbMarshaller.setSchema(schema);
-               /* if(schema==null){
-                    System.out.println("LO SCHEMA è VUOTO");
-                }
-                else{
-                    System.out.println(" Lo SCHEMA é"+schema.toString());
-                }*/
+               
+                /**
+                 * Richiama un metodo che procede a validare il documento 
+                 * 
+                 * NOTA BY UMBERTO
+                 * il parsing non è possibile ancora effettuarlo sul WFS.XSD
+                 * Vi spiego brevemente il perchè:
+                 * allora il gruppo di http://confluence.highsource.org/display/OGCS/Schemas
+                 * ci ha fornito gentilmente con un lavoro che avrebbe richiesto un 3-4 anni fatto 
+                 * da solo ovvero fare il binding del WFS.xsd e di tutte le varie dipendenze 
+                 * e mapparle in classi java che siano adatte poi ad essere date in pasto a JAXB
+                 * e a generarci il nostro bel XML
+                 * 
+                 */
+                //validaXML(jaxbMarshaller);
+               
+                
                 jaxbMarshaller.marshal((WFSCapabilitiesType) classe, file);
-          //  } catch (SAXException ex) {
-            //    Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
-            //} catch (MalformedURLException ex) {
-             //   Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
-            //}
+           
                 
             
         }
@@ -453,4 +457,19 @@ public class Utility {
         return file;
 
     }
+
+    private void validaXML(Marshaller jaxbMarshaller) {
+        try {
+            // Create an XML schema factory
+                     SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+                     // Get the WMS 1.3.0 classpath resource URL
+                     URL schemaURL = getClass().getClassLoader().getResource("wfs/1.1.0/wfs.xsd");
+                     Schema schema = schemaFactory.newSchema(schemaURL);
+                     jaxbMarshaller.setSchema(schema);
+        } catch (SAXException ex) {
+            Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
 }
