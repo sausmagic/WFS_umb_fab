@@ -36,6 +36,8 @@ import net.opengis.ows.v_1_0_0.TelephoneType;
 import net.opengis.ows.v_1_0_0.WGS84BoundingBoxType;
 import net.opengis.wfs.v_1_1_0.FeatureTypeListType;
 import net.opengis.wfs.v_1_1_0.FeatureTypeType;
+import net.opengis.wfs.v_1_1_0.GMLObjectTypeListType;
+import net.opengis.wfs.v_1_1_0.GMLObjectTypeType;
 import net.opengis.wfs.v_1_1_0.OutputFormatListType;
 import net.opengis.wfs.v_1_1_0.WFSCapabilitiesType;
 import request.GetCapabilitiesRequest;
@@ -83,7 +85,7 @@ public class GetCapabilitiesResponse {
         createFeatureTypeList();
         //FINE -  FEATURE TYPE LIST SECTION
         
-        createServesGMLObjectTypeList();
+        //createServesGMLObjectTypeList();
 
 
         //Facciamo una prova
@@ -409,8 +411,13 @@ public class GetCapabilitiesResponse {
     /**
      * nel pacchetto WFS 1.1.0 manca la classe ServesGMLObjectTypeList
      * vedi nota nel metodo createXML nella classe utility.java grazie 
-     */
+     
     private void createServesGMLObjectTypeList() {
-        
-    }
+        GMLObjectTypeListType SGOTL = new GMLObjectTypeListType();
+       List<GMLObjectTypeType> typelist = new ArrayList<GMLObjectTypeType>();
+       GMLObjectTypeType type1 = new GMLObjectTypeType();
+       typelist.add(type1);
+        SGOTL.setGMLObjectType(typelist);
+        getCapabilitieResp.setServesGMLObjectTypeList(SGOTL);
+    }*/
 }
