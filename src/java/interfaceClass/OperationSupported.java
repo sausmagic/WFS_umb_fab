@@ -13,4 +13,6 @@ public interface OperationSupported {
     public void getCapabilities();
     
     public void getGetFeature();
+    
+    public void DescribeFeatureType();
 }

@@ -34,8 +34,10 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import net.opengis.ows.v_1_0_0.ExceptionReport;
 import net.opengis.ows.v_1_0_0.ExceptionType;
+import net.opengis.wfs.v_1_1_0.DescribeFeatureTypeType;
 import net.opengis.wfs.v_1_1_0.WFSCapabilitiesType;
 import org.xml.sax.SAXException;
+import request.DescribeFeatureTypeRequest;
 import request.GetCapabilitiesRequest;
 import servlet.RequestResponse;
 
@@ -74,6 +76,15 @@ public class Utility {
             System.out.println("Versione accettata= " + capabilitiesRequest.getVersion());
             //xmlResponseGetCapabilitiesRequest = capabilitiesRequest.getResponseGetCapabilitiesRequest();
         }
+        
+         if (richiest.equalsIgnoreCase("DescribeFeatureType")) {
+            System.out.println("Vado a chiamare la classe DescribeFeatureTypeRequest");
+            
+            DescribeFeatureTypeRequest describeRequest = new DescribeFeatureTypeRequest(request);
+            System.out.println("Versione accettata= " + describeRequest.getVersion());
+            //xmlResponseGetCapabilitiesRequest = capabilitiesRequest.getResponseGetCapabilitiesRequest();
+        }
+        
         if (richiest.isEmpty()) {
             System.out.println("La request è vuota");
             throw new WFSException(request, "Errore non sono stati definiti i parametri obbligatori", null, "MissingParameterValue");
@@ -98,7 +109,8 @@ public class Utility {
         String richiesta = new String();
         String service = new String();
         String version = new String();
-
+        /*aggiunta per describeFeature*/
+        String typeName = new String();
         /**
          * Prendiamo il nome dei parametri in modo che possano essere richiamati
          * in qualsiasi forma
@@ -120,6 +132,11 @@ public class Utility {
             if (key.equalsIgnoreCase("version")) {
                 version = value;
             }
+            
+            if (key.equalsIgnoreCase("typename")) {
+                typeName = value;
+            }
+            
             if (key.equalsIgnoreCase("section")) {
                 continue;
             }
@@ -428,6 +445,42 @@ public class Utility {
                 
             
         }
+        
+        
+        if (classe instanceof DescribeFeatureTypeType) {
+                      
+                System.out.println("describiamooooo\n");
+                file = new FileOutputStream("DescribeFeatureTypeResponse.xml");
+                JAXBContext context = JAXBContext.newInstance("net.opengis.wfs.v_1_1_0");
+                Marshaller jaxbMarshaller = context.createMarshaller();
+                // output pretty printed
+                jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+               
+                /**
+                 * Richiama un metodo che procede a validare il documento 
+                 * 
+                 * NOTA BY UMBERTO
+                 * il parsing non è possibile ancora effettuarlo sul WFS.XSD
+                 * Vi spiego brevemente il perchè:
+                 * allora il gruppo di http://confluence.highsource.org/display/OGCS/Schemas
+                 * ci ha fornito gentilmente con un lavoro che avrebbe richiesto un 3-4 anni fatto 
+                 * da solo ovvero fare il binding del WFS.xsd e di tutte le varie dipendenze 
+                 * e mapparle in classi java che siano adatte poi ad essere date in pasto a JAXB
+                 * e a generarci il nostro bel XML
+                 * 
+                 */
+                //validaXML(jaxbMarshaller);
+               
+                
+                jaxbMarshaller.marshal((DescribeFeatureTypeType) classe, file);
+           
+                
+            
+        }
+        
+        
+        
+        
         /**
          * Se l'oggetto classe è del tipo WFSException vuol dire che è avvenuto
          * un errore ed è stata lanciata una eccezione
