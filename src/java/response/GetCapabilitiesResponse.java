@@ -92,6 +92,7 @@ public class GetCapabilitiesResponse {
         try {
             a = util.createXML(getCapabilitieResp);
             File file = new File("GetCapabilitiesResponse.xml");
+            System.out.println("IL FILE SI TROVA QUI: "+file.getAbsolutePath());
             BufferedReader reader = new BufferedReader(new FileReader(file));
             // BufferedReader reader2 = new BufferedReader(new FileReader(a.getFD()));
             String line = reader.readLine();
