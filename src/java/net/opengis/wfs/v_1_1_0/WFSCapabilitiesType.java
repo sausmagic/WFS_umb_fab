@@ -79,6 +79,7 @@ import org.jvnet.jaxb2_commons.locator.util.LocatorUtils;
     "supportsGMLObjectTypeList",
     "filterCapabilities"
 })
+//------------------Ho aggiunto io (Umberto Palo) il XMLRootElement che manacava e non andava il marshalling con JAXB 
 @XmlRootElement(name = "WFS_Capabilities")
 public class WFSCapabilitiesType
     extends CapabilitiesBaseType
