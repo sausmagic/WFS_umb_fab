@@ -17,6 +17,11 @@ public class NegotiateVersion {
     private static String VS_11 = "1.1.0";
     private static String VS_20 = "2.0.0";
 
+    /**
+     * Metodo che ritorna true se la versione è supportata e false viceversa
+     * @param version
+     * @return 
+     */
     public static boolean acceptedVersion(String version) {
 
         // if(version.isEmpty())
@@ -32,10 +37,10 @@ public class NegotiateVersion {
         if (version.equalsIgnoreCase(VS_11)) {
             return true;
         } else if (version.equalsIgnoreCase(VS_20)) {
-            return true;
+            return false;
         }
         else if (version.equalsIgnoreCase(VS_10)) {
-            return true;
+            return false;
         }
         return false;
     }
@@ -43,6 +48,11 @@ public class NegotiateVersion {
     /**
      * public static String getSupportedVersion(){ return VS_11;
     }*
+     */
+    /**
+     * attualmente ritorna che supporta tutte e tre le versioni è solo una prova 
+     * supporta solo la versione WFS 1.1 in quanto solo questa specifica sto lavorando
+     * @return 
      */
     public static List<String> getSupportedVersion() {
         List<String> supportedversionList = new ArrayList<String>();

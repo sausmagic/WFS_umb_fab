@@ -13,8 +13,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Umberto
+ * Nota bene questa classe serve per la connessione al DB alla vecchia maniera richiamando il driver JDBC
+ * da codice. In futuro una volta stabilizzato tutto potrebbe essere utile e ragionevole usare Java Persistence 
+ * API (JPA) in quanto usiamo Glassfish e dalla console di Admin è possibile creare un pool di connessioni
+ * e configurare direttamente nell'application server la connessione al database e usufruendo di query di default
+ * quali ricerca ad esempio e la facilità di costruire query in modo più semplice.
+ 
+ * @author Umberto Palo
  */
 public class operazioniDB implements connessionePostgresql {
 

@@ -41,8 +41,9 @@ import servlet.RequestResponse;
 
 /**
  * In questa classe sono presenti tutti i metodi di supporto ed utilità
+ * ai diversi pacchetti del progetto.
  *
- * @author Umberto
+ * @author Umberto Palo
  */
 public class Utility {
 

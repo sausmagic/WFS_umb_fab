@@ -45,8 +45,10 @@ import servlet.RequestResponse;
 import util.Utility;
 
 /**
- *
- * @author Umberto
+ *Questa classe crea l'oggetto di risposta che verrà riversato in un documento XML
+ * Alla versione attuale sono state definite solo le funzionalità e le feature supportate
+ * Web Feature Service Basic
+ * @author Umberto Palo
  */
 public class GetCapabilitiesResponse {
 

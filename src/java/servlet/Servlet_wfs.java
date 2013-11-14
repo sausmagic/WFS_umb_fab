@@ -16,8 +16,9 @@ import javax.xml.bind.JAXBException;
 import util.Utility;
 
 /**
- *
- * @author Umberto
+ * Questa classe è il governor del servizio
+ * Gestiscle le richieste GET & POST e le rimanda a chi di competenza
+ * @author Umberto Palo
  */
 public class Servlet_wfs extends HttpServlet {
 
