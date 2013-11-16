@@ -14,6 +14,7 @@ import net.opengis.ows.v_1_0_0.ExceptionReport;
 import net.opengis.ows.v_1_0_0.ExceptionType;
 import net.opengis.ows.v_1_0_0.ObjectFactory;
 import response.GetCapabilitiesResponse;
+import response.WFS_GetCapabilitiesResponse;
 
 import servlet.RequestResponse;
 import wfs.GetCapabilities;
@@ -28,7 +29,7 @@ public class GetCapabilitiesRequest {
     
     private String request,service,version, updateSequence;
     private List<String> sections, acceptFormat,acceptLenguage;
-    FileOutputStream xmlResponseGetCapabilitiesRequest;
+    FileOutputStream xmlResponseGetCapabilitiesRequest, xmlResponseGetCapabilitiesRequest2;
     
     /**
      * 
@@ -158,8 +159,16 @@ public class GetCapabilitiesRequest {
          * una volta costruita la request il server analizza i dati della richiesta, procederà a eseguire la response
          * al client richiamando la classe GetCapabilitiesrResponse che procederà a creare i dati per la risposta.
          */
-        GetCapabilitiesResponse getCapabilities = new GetCapabilitiesResponse(this, request);
-        xmlResponseGetCapabilitiesRequest = getCapabilities.getCapabilitiesResponseXML();
+        //-------------questo racchiuso funziona bene---------------//
+        //GetCapabilitiesResponse getCapabilities = new GetCapabilitiesResponse(this, request);
+        
+        //xmlResponseGetCapabilitiesRequest = getCapabilities.getCapabilitiesResponseXML();
+       //-------------questo racchiuso funziona bene---------------//
+        
+        //------li ho aggiunti in quanto utilizzano ObjectFactory delle librerie WFS 1.0-------------//
+        //-------------funziona anche questo, rimango attivo questo per corretta utilizzazione-----------//
+        WFS_GetCapabilitiesResponse getCapabilities2 = new WFS_GetCapabilitiesResponse(this, request);
+        xmlResponseGetCapabilitiesRequest2 = getCapabilities2.getCapabilitiesResponseXML();
         
     }
     /**
@@ -254,5 +263,14 @@ public class GetCapabilitiesRequest {
      */
     public FileOutputStream getResponseGetCapabilitiesRequest(){
         return xmlResponseGetCapabilitiesRequest;
+    }
+    
+    /**
+     * Questo metodo viene richiamato una volta che la richiesta del client è stata analizzata.
+     * Una volta analizzata la request, verrà richiamata la classe che procederà a creare la risposta in formato xml
+     * @return xmlResponseGetCapabilitiesRequest stream di dati in formato xml salvato in un file locale.
+     */
+    public FileOutputStream getResponseGetCapabilitiesRequest2(){
+        return xmlResponseGetCapabilitiesRequest2;
     }
 }

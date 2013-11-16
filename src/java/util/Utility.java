@@ -28,12 +28,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import net.opengis.ows.v_1_0_0.ExceptionReport;
 import net.opengis.ows.v_1_0_0.ExceptionType;
+import net.opengis.wfs.v_1_1_0.ObjectFactory;
 import net.opengis.wfs.v_1_1_0.WFSCapabilitiesType;
 import org.xml.sax.SAXException;
 import request.GetCapabilitiesRequest;
@@ -426,6 +428,89 @@ public class Utility {
                 
                 jaxbMarshaller.marshal((WFSCapabilitiesType) classe, file);
            
+                
+            
+        }
+        /**
+         * Se l'oggetto classe è del tipo WFSException vuol dire che è avvenuto
+         * un errore ed è stata lanciata una eccezione
+         */
+        if (classe instanceof WFSException) {
+            file = new FileOutputStream("ExceptionReport.xml");
+            ExceptionReport ER = new ExceptionReport();
+            ExceptionType ET = new ExceptionType();
+            ET.setExceptionCode(((WFSException) classe).getCode());
+            ET.setLocator(((WFSException) classe).getLocator());
+
+            List<String> ExcText = new ArrayList<String>();
+            ExcText.add(((WFSException) classe).getMessage());
+            ET.setExceptionText(ExcText);
+
+            List<ExceptionType> listException = new ArrayList<ExceptionType>();
+            listException.add(ET);
+            ER.setException(listException);
+
+            JAXBContext context = JAXBContext.newInstance("net.opengis.ows.v_1_0_0");
+            Marshaller jaxbMarshaller = context.createMarshaller();
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            jaxbMarshaller.marshal(ER, file);
+            jaxbMarshaller.marshal(ER, System.out);
+
+        }
+        return file;
+
+    }
+    
+    /**
+     * Metodo di supporto che prende un oggetto e controlla con istanceof che
+     * tipo di oggetto è, successivamente procede a fare il murshalling dei dati
+     * utilizzando JAXB.
+     * 
+     * Nota: sul sito del progetto indicato da OGC, dove riporta il 
+     * riferimento al progetto jaxb-java per schemi OGC nel loro 
+     * tutorial non eseguono la validazione del documento.
+     * Io (Umberto Palo) ho provato a fare la validazione (rimango le chiamate alla validazione commentate)
+     * ma ottengo sempre errori strani non sapendo cosa specificare in SchemaFactory
+     * Non essendo W3C e OGC operanti sugli stessi standard.
+     * 
+     * Viene richiamato dalla classe che utillizzctFactory del pacchetto dei WFS contenenti gli schema wfs
+     *
+     * @param classe
+     * @return
+     */
+    public FileOutputStream createXML2(Object classe) throws JAXBException, FileNotFoundException {
+
+        FileOutputStream file = null;
+        ObjectFactory wfsFactory;
+        if (classe instanceof WFSCapabilitiesType) {
+                System.out.println("SE MI LEGGI VADO A SCRIVERE UN DOCUMENTO WFS_CAPABILITIES");      
+                //file = new FileOutputStream("C:\\Users\\Umberto\\GetCapabilitiesResponse.xml");
+                file = new FileOutputStream("GetCapabilitiesResponseConFactory.xml");
+                JAXBContext context = JAXBContext.newInstance("net.opengis.wfs.v_1_1_0");
+                Marshaller jaxbMarshaller = context.createMarshaller();
+                wfsFactory = new ObjectFactory();
+                JAXBElement<WFSCapabilitiesType> wfsCapabilities = wfsFactory.createWFSCapabilities((WFSCapabilitiesType)classe);
+                // output pretty printed
+                jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+               
+                /**
+                 * Richiama un metodo che procede a validare il documento 
+                 * 
+                 * NOTA BY UMBERTO
+                 * il parsing non è possibile ancora effettuarlo sul WFS.XSD
+                 * Vi spiego brevemente il perchè:
+                 * allora il gruppo di http://confluence.highsource.org/display/OGCS/Schemas
+                 * ci ha fornito gentilmente con un lavoro che avrebbe richiesto un 3-4 anni fatto 
+                 * da solo ovvero fare il binding del WFS.xsd e di tutte le varie dipendenze 
+                 * e mapparle in classi java che siano adatte poi ad essere date in pasto a JAXB
+                 * e a generarci il nostro bel XML
+                 * 
+                 */
+                //validaXML(jaxbMarshaller);
+               
+                //jaxbMarshaller.marshal((WFSCapabilitiesType) classe, file);
+                jaxbMarshaller.marshal(wfsCapabilities, file);
+            System.out.println("OK HO SCRITTO CORRETTAMENTE IL FILE GetCapabilitiesResponseConFactory.xml");
                 
             
         }

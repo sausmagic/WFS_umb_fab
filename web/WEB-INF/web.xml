@@ -8,14 +8,22 @@
         <servlet-name>GetCapabilitiesRequest</servlet-name>
         <servlet-class>request.GetCapabilitiesRequest</servlet-class>
     </servlet> -->
+    <!--<servlet>
+        <servlet-name>Servlet_wfs2</servlet-name>
+        <servlet-class>servlet.Servlet_wfs2</servlet-class>
+    </servlet> -->
     <servlet-mapping>
         <servlet-name>Servlet_wfs</servlet-name>
         <url-pattern>/Servlet_wfs</url-pattern>
     </servlet-mapping>
-   <!-- <servlet-mapping>
+    <!-- <servlet-mapping>
         <servlet-name>GetCapabilitiesRequest</servlet-name>
         <url-pattern>/GetCapabilitiesRequest</url-pattern>
     </servlet-mapping>-->
+    <!--<servlet-mapping>
+        <servlet-name>Servlet_wfs2</servlet-name>
+        <url-pattern>/Servlet_wfs2</url-pattern>
+    </servlet-mapping> -->
     <session-config>
         <session-timeout>
             30
