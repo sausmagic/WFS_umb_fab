@@ -44,7 +44,11 @@ import servlet.RequestResponse;
 import util.Utility;
 
 /**
- *
+ * Questa classe è quella ufficiale e richiamata dalla request
+ * Il codice potrebbe essere ottimizzato fornendo una classe di supporto
+ * per una automazione nella creazione dei diversi oggetti che sono ripetitivi.
+ * Non è stata fattà perchè purtroppo sono da solo e ho dovuto vedere anche altre
+ * cose.
  * @author Umberto
  */
 public class WFS_GetCapabilitiesResponse {
@@ -374,6 +378,7 @@ public class WFS_GetCapabilitiesResponse {
     private void createFeatureTypeList() {
         FeatureTypeListType featureTypeList = new FeatureTypeListType();
         List<FeatureTypeType> listFeatureType = new ArrayList<FeatureTypeType>();
+        //--------------Feature Mercato--------------------------------------//
         FeatureTypeType featureTypeMercato =new FeatureTypeType();
         featureTypeMercato.setAbstract("Questa feature descrive un Mercato");
         featureTypeMercato.setDefaultSRS("EPSG:4269");
@@ -383,7 +388,7 @@ public class WFS_GetCapabilitiesResponse {
         keywordList.add("mercato");
         keywordMercato.setKeyword(keywordList);
         featureTypeMercato.setKeywords(keywords);
-        QName nameMercato = new QName("http://localhost:8080/WFS_umb_fab/Servlet_wfs","umb","umb");
+        QName nameMercato = new QName("http://localhost:8080/WFS_umb_fab/Servlet_wfs","Marketplace");
         featureTypeMercato.setName(nameMercato);
         OutputFormatListType listFormatOut = new OutputFormatListType();
         List<String> outputFormat = new ArrayList<String>();
@@ -405,6 +410,173 @@ public class WFS_GetCapabilitiesResponse {
         listBbox.add(Bbox);
         featureTypeMercato.setWGS84BoundingBox(listBbox);
         listFeatureType.add(featureTypeMercato);
+        //-------------------------fine mercato----------------------------//
+        //--------------------feature FARM--------------------------------//
+        FeatureTypeType featureFarm = factoryWFS.createFeatureTypeType();
+        featureFarm.setAbstract("Questa Feature descrive una FARM");
+        featureFarm.setTitle("Farm");
+        featureFarm.setDefaultSRS("EPSG:4269");
+        List<KeywordsType> keywordsFarm = new ArrayList<KeywordsType>();
+        KeywordsType keywordFarm = new KeywordsType();
+        List<String> keywordListFarm = new ArrayList<String>();
+        keywordListFarm.add("mercato");
+        keywordFarm.setKeyword(keywordListFarm);
+        featureFarm.setKeywords(keywordsFarm);
+        QName nameFarm = new QName("http://localhost:8080/WFS_umb_fab/Servlet_wfs","Farm");
+        featureFarm.setName(nameFarm);
+        OutputFormatListType listFormatOutFarm = new OutputFormatListType();
+        List<String> outputFormatFarm = new ArrayList<String>();
+        outputFormatFarm.add("text/xml");
+        outputFormatFarm.add("subtype=gml/3.1.1");
+        listFormatOutFarm.setFormat(outputFormatFarm);
+        featureFarm.setOutputFormats(listFormatOutFarm);
+        List<WGS84BoundingBoxType> listBboxFarm = new ArrayList<WGS84BoundingBoxType>();
+        WGS84BoundingBoxType BboxFarm = new WGS84BoundingBoxType();
+        List<Double> lowerCornerFarm = new ArrayList<Double>();
+        lowerCornerFarm.add(new Double("-180"));
+        lowerCornerFarm.add(new Double("90"));
+        BboxFarm.setLowerCorner(lowerCornerFarm);
+        List<Double> UpperCornerFarm = new ArrayList<Double>();
+        UpperCornerFarm.add(new Double("180"));
+        UpperCornerFarm.add(new Double("-90"));
+        BboxFarm.setUpperCorner(UpperCornerFarm);
+        listBboxFarm.add(BboxFarm);
+        featureFarm.setWGS84BoundingBox(listBboxFarm);
+        listFeatureType.add(featureFarm);
+        //----------------------fine Farm--------------------------------//
+        //----------------------feature CITTA'--------------------//
+        FeatureTypeType featureCity = factoryWFS.createFeatureTypeType();
+        featureCity.setAbstract("Questa Feature descrive una Città");
+        featureCity.setTitle("City");
+        featureCity.setDefaultSRS("EPSG:4269");
+        List<KeywordsType> keywordsCity = new ArrayList<KeywordsType>();
+        KeywordsType keywordCity = new KeywordsType();
+        List<String> keywordListCity = new ArrayList<String>();
+        keywordListCity.add("City");
+        keywordCity.setKeyword(keywordListCity);
+        featureCity.setKeywords(keywordsCity);
+        QName nameCity = new QName("http://localhost:8080/WFS_umb_fab/Servlet_wfs","City");
+        featureCity.setName(nameCity);
+        OutputFormatListType listFormatOutCity = new OutputFormatListType();
+        List<String> outputFormatCity = new ArrayList<String>();
+        outputFormatCity.add("text/xml");
+        outputFormatCity.add("subtype=gml/3.1.1");
+        listFormatOutCity.setFormat(outputFormatCity);
+        featureCity.setOutputFormats(listFormatOutCity);
+        List<WGS84BoundingBoxType> listBboxCity = new ArrayList<WGS84BoundingBoxType>();
+        WGS84BoundingBoxType BboxCity = new WGS84BoundingBoxType();
+        List<Double> lowerCornerCity = new ArrayList<Double>();
+        lowerCornerCity.add(new Double("-180"));
+        lowerCornerCity.add(new Double("90"));
+        BboxCity.setLowerCorner(lowerCornerCity);
+        List<Double> UpperCornerCity = new ArrayList<Double>();
+        UpperCornerCity.add(new Double("180"));
+        UpperCornerCity.add(new Double("-90"));
+        BboxCity.setUpperCorner(UpperCornerCity);
+        listBboxCity.add(BboxCity);
+        featureCity.setWGS84BoundingBox(listBboxCity);
+        listFeatureType.add(featureCity);
+        //------------------------fine feature Città------------------------//
+        //----------------------feature distretto--------------------//
+        FeatureTypeType featureDistrict = factoryWFS.createFeatureTypeType();
+        featureDistrict.setAbstract("Questa Feature descrive un District");
+        featureDistrict.setTitle("District");
+        featureDistrict.setDefaultSRS("EPSG:4269");
+        List<KeywordsType> keywordsDistrict = new ArrayList<KeywordsType>();
+        KeywordsType keywordDistrict = new KeywordsType();
+        List<String> keywordListDistrict = new ArrayList<String>();
+        keywordListDistrict.add("District");
+        keywordDistrict.setKeyword(keywordListDistrict);
+        featureDistrict.setKeywords(keywordsDistrict);
+        QName nameDistrict = new QName("http://localhost:8080/WFS_umb_fab/Servlet_wfs","District");
+        featureDistrict.setName(nameDistrict);
+        OutputFormatListType listFormatOutDistrict = new OutputFormatListType();
+        List<String> outputFormatDistrict = new ArrayList<String>();
+        outputFormatDistrict.add("text/xml");
+        outputFormatDistrict.add("subtype=gml/3.1.1");
+        listFormatOutDistrict.setFormat(outputFormatDistrict);
+        featureDistrict.setOutputFormats(listFormatOutDistrict);
+        List<WGS84BoundingBoxType> listBboxDistrict = new ArrayList<WGS84BoundingBoxType>();
+        WGS84BoundingBoxType BboxDistrict = new WGS84BoundingBoxType();
+        List<Double> lowerCornerDistrict = new ArrayList<Double>();
+        lowerCornerDistrict.add(new Double("-180"));
+        lowerCornerDistrict.add(new Double("90"));
+        BboxDistrict.setLowerCorner(lowerCornerCity);
+        List<Double> UpperCornerDistrict = new ArrayList<Double>();
+        UpperCornerDistrict.add(new Double("180"));
+        UpperCornerDistrict.add(new Double("-90"));
+        BboxDistrict.setUpperCorner(UpperCornerDistrict);
+        listBboxDistrict.add(BboxDistrict);
+        featureDistrict.setWGS84BoundingBox(listBboxDistrict);
+        listFeatureType.add(featureDistrict);
+        //------------------------fine feature distretto------------------------//
+        //----------------------feature Provincia--------------------//
+        FeatureTypeType featureProvince = factoryWFS.createFeatureTypeType();
+        featureProvince.setAbstract("Questa Feature descrive una Province");
+        featureProvince.setTitle("Province");
+        featureProvince.setDefaultSRS("EPSG:4269");
+        List<KeywordsType> keywordsProvince = new ArrayList<KeywordsType>();
+        KeywordsType keywordProvince = new KeywordsType();
+        List<String> keywordListProvince = new ArrayList<String>();
+        keywordListProvince.add("Province");
+        keywordProvince.setKeyword(keywordListProvince);
+        featureProvince.setKeywords(keywordsProvince);
+        QName nameProvince = new QName("http://localhost:8080/WFS_umb_fab/Servlet_wfs","Province");
+        featureProvince.setName(nameProvince);
+        OutputFormatListType listFormatOutProvince = new OutputFormatListType();
+        List<String> outputFormatProvince = new ArrayList<String>();
+        outputFormatProvince.add("text/xml");
+        outputFormatProvince.add("subtype=gml/3.1.1");
+        listFormatOutProvince.setFormat(outputFormatProvince);
+        featureProvince.setOutputFormats(listFormatOutProvince);
+        List<WGS84BoundingBoxType> listBboxProvince = new ArrayList<WGS84BoundingBoxType>();
+        WGS84BoundingBoxType BboxProvince = new WGS84BoundingBoxType();
+        List<Double> lowerCornerProvince = new ArrayList<Double>();
+        lowerCornerProvince.add(new Double("-180"));
+        lowerCornerProvince.add(new Double("90"));
+        BboxProvince.setLowerCorner(lowerCornerProvince);
+        List<Double> UpperCornerProvince = new ArrayList<Double>();
+        UpperCornerProvince.add(new Double("180"));
+        UpperCornerProvince.add(new Double("-90"));
+        BboxProvince.setUpperCorner(UpperCornerProvince);
+        listBboxProvince.add(BboxProvince);
+        featureProvince.setWGS84BoundingBox(listBboxProvince);
+        listFeatureType.add(featureProvince);
+        //------------------------fine feature Provincia------------------------//
+        //----------------------feature CITTA'--------------------//
+        FeatureTypeType featureNation = factoryWFS.createFeatureTypeType();
+        featureNation.setAbstract("Questa Feature descrive una Nazione");
+        featureNation.setTitle("Nation");
+        featureNation.setDefaultSRS("EPSG:4269");
+        List<KeywordsType> keywordsNation = new ArrayList<KeywordsType>();
+        KeywordsType keywordNation = new KeywordsType();
+        List<String> keywordListNation = new ArrayList<String>();
+        keywordListNation.add("Nazione");
+        keywordNation.setKeyword(keywordListNation);
+        featureNation.setKeywords(keywordsNation);
+        QName nameNation = new QName("http://localhost:8080/WFS_umb_fab/Servlet_wfs","Nation");
+        featureNation.setName(nameNation);
+        OutputFormatListType listFormatOutNation = new OutputFormatListType();
+        List<String> outputFormatNation = new ArrayList<String>();
+        outputFormatNation.add("text/xml");
+        outputFormatNation.add("subtype=gml/3.1.1");
+        listFormatOutNation.setFormat(outputFormatNation);
+        featureNation.setOutputFormats(listFormatOutNation);
+        List<WGS84BoundingBoxType> listBboxNation = new ArrayList<WGS84BoundingBoxType>();
+        WGS84BoundingBoxType BboxNation = new WGS84BoundingBoxType();
+        List<Double> lowerCornerNation = new ArrayList<Double>();
+        lowerCornerNation.add(new Double("-180"));
+        lowerCornerNation.add(new Double("90"));
+        BboxNation.setLowerCorner(lowerCornerNation);
+        List<Double> UpperCornerNation = new ArrayList<Double>();
+        UpperCornerNation.add(new Double("180"));
+        UpperCornerNation.add(new Double("-90"));
+        BboxNation.setUpperCorner(UpperCornerNation);
+        listBboxNation.add(BboxNation);
+        featureNation.setWGS84BoundingBox(listBboxNation);
+        listFeatureType.add(featureNation);
+        //------------------------fine feature Città------------------------//
+        
         featureTypeList.setFeatureType(listFeatureType);
         getCapabilitieResp.setFeatureTypeList(featureTypeList);
         
