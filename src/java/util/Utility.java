@@ -15,7 +15,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -38,6 +37,7 @@ import net.opengis.ows.v_1_0_0.ExceptionType;
 import net.opengis.wfs.v_1_1_0.ObjectFactory;
 import net.opengis.wfs.v_1_1_0.WFSCapabilitiesType;
 import org.xml.sax.SAXException;
+import request.DescribeFeatureTypeRequest;
 import request.GetCapabilitiesRequest;
 import servlet.RequestResponse;
 
@@ -77,6 +77,15 @@ public class Utility {
             System.out.println("Versione accettata= " + capabilitiesRequest.getVersion());
             //xmlResponseGetCapabilitiesRequest = capabilitiesRequest.getResponseGetCapabilitiesRequest();
         }
+        
+         if (richiest.equalsIgnoreCase("DescribeFeatureType")) {
+            System.out.println("Vado a chiamare la classe DescribeFeatureTypeRequest");
+            
+            DescribeFeatureTypeRequest describeRequest = new DescribeFeatureTypeRequest(request);
+            System.out.println("Versione accettata= " + describeRequest.getVersion());
+            //xmlResponseGetCapabilitiesRequest = capabilitiesRequest.getResponseGetCapabilitiesRequest();
+        }
+        
         if (richiest.isEmpty()) {
             System.out.println("La request è vuota");
             throw new WFSException(request, "Errore non sono stati definiti i parametri obbligatori", null, "MissingParameterValue");
@@ -101,7 +110,8 @@ public class Utility {
         String richiesta = new String();
         String service = new String();
         String version = new String();
-
+        /*aggiunta per describeFeature*/
+        String typeName = new String();
         /**
          * Prendiamo il nome dei parametri in modo che possano essere richiamati
          * in qualsiasi forma
@@ -123,6 +133,11 @@ public class Utility {
             if (key.equalsIgnoreCase("version")) {
                 version = value;
             }
+            
+            if (key.equalsIgnoreCase("typename")) {
+                typeName = value;
+            }
+            
             if (key.equalsIgnoreCase("section")) {
                 continue;
             }
@@ -431,6 +446,13 @@ public class Utility {
                 
             
         }
+        
+        
+        
+        
+        
+        
+        
         /**
          * Se l'oggetto classe è del tipo WFSException vuol dire che è avvenuto
          * un errore ed è stata lanciata una eccezione
