@@ -489,7 +489,11 @@ public class Utility {
                 JAXBContext context = JAXBContext.newInstance("net.opengis.wfs.v_1_1_0");
                 Marshaller jaxbMarshaller = context.createMarshaller();
                 wfsFactory = new ObjectFactory();
-                JAXBElement<WFSCapabilitiesType> wfsCapabilities = wfsFactory.createWFSCapabilities((WFSCapabilitiesType)classe);
+                WFSCapabilitiesType wfsclass = (WFSCapabilitiesType)classe;
+                
+                
+                JAXBElement<WFSCapabilitiesType> wfsCapabilities = wfsFactory.createWFSCapabilities(wfsclass);
+                //JAXBElement<WFSCapabilitiesType> wfsCapabilities = wfsFactory.createWFSCapabilities((WFSCapabilitiesType)classe);
                 // output pretty printed
                 jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
                
